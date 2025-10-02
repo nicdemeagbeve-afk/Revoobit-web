@@ -60,7 +60,7 @@ const AffiliateDashboard = () => {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h1 className="text-4xl font-display font-bold mb-2">
-                  Dashboard <span className="gradient-hero bg-clip-text text-transparent">Affilié</span>
+                  Dashboard <span className="gradient-hero bg-clip-text text-white">Affilié</span>
                 </h1>
                 <p className="text-muted-foreground">Gérez votre mini-site professionnel</p>
               </div>

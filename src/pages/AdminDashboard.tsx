@@ -88,7 +88,7 @@ const AdminDashboard = () => {
           {/* Header */}
           <div className="mb-8 animate-fade-in">
             <h1 className="text-4xl font-display font-bold mb-2">
-              Dashboard <span className="gradient-hero bg-clip-text text-transparent">Administrateur</span>
+              Dashboard <span className="gradient-hero bg-clip-text text-white">Administrateur</span>
             </h1>
             <p className="text-muted-foreground">Gérez votre plateforme et vos affiliés</p>
           </div>

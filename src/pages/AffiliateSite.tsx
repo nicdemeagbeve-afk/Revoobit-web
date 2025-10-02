@@ -12,12 +12,110 @@ import {
   Mail, 
   MapPin, 
   Clock,
-  Calendar,
+  ShoppingCart,
   MessageCircle,
-  Download,
   Send,
-  Sparkles
+  Heart,
+  Star,
+  Truck,
+  Shield,
+  Users,
+  ArrowRight,
+  Sparkles,
+  Award,
+  Zap,
+  CheckCircle
 } from "lucide-react";
+
+// ==================== VARIABLES CONFIGURABLES ====================
+// Ces variables pourront être remplacées par les données du backend
+
+const AFFILIATE_INFO = {
+  name: "Dr. Jean Dupont",
+  title: "Conseillère Santé Certifiée",
+  phone: "+33 1 23 45 67 89",
+  email: "jean@revoobit.com",
+  zone: "Île-de-France et France entière",
+  horaires: "Lundi - Samedi • 9h00 - 20h00",
+  rating: 4.9,
+  reviews: 127,
+  specialty: "Bien-être & Nutrition Cellulaire"
+};
+
+const PRODUCTS = [
+  {
+    id: 1,
+    name: "Miira-Cell+",
+    description: "Nutriment cellulaire révolutionnaire à base de cellules souches végétales de pomme Uttwiler Spätlauber",
+    price: "129,00 €",
+    features: ["Cellules souches de pomme", "Régénération cellulaire", "Énergie et vitalité", "Anti-âge naturel"],
+    badge: "Best-seller",
+    image: "/assets/mira-cell.png"
+  },
+  {
+    id: 2,
+    name: "Miira Tiara",
+    description: "Soin complet premium pour une peau radieuse, revitalisée et régénérée",
+    price: "89,00 €",
+    features: ["Éclat immédiat", "Hydratation profonde", "Anti-âge naturel", "Peau repulpée"],
+    badge: "Nouveau",
+    image: "/images/miira-tiara.png"
+  },
+  {
+    id: 3,
+    name: "Miiralife",
+    description: "Supplement de bien-être quotidien pour une protection cellulaire optimale et durable",
+    price: "79,00 €",
+    features: ["Protection cellulaire", "Bien-être quotidien", "Formule complète", "Énergie durable"],
+    badge: "Essentiel",
+    image: "/images/miiralife.png"
+  }
+];
+
+const BENEFITS = [
+  {
+    icon: Users,
+    title: "Conseils Personnalisés",
+    description: "Accompagnement sur mesure selon vos objectifs bien-être"
+  },
+  {
+    icon: Truck,
+    title: "Livraison Rapide",
+    description: "Expédition sous 24h partout en France"
+  },
+  {
+    icon: Shield,
+    title: "Suivi Personnalisé",
+    description: "Support continu pour optimiser vos résultats"
+  },
+  {
+    icon: Award,
+    title: "Produits Certifiés",
+    description: "Formules brevetées et scientifiquement étudiées"
+  }
+];
+
+const TESTIMONIALS = [
+  {
+    name: "Marie L.",
+    text: "Sarah m'a guidée vers les bons produits. Mon énergie a été transformée en 3 semaines seulement !",
+    rating: 5,
+    product: "Miira-Cell+"
+  },
+  {
+    name: "Pierre D.",
+    text: "Un suivi exceptionnel et des résultats visibles sur ma peau. Je recommande vivement !",
+    rating: 5,
+    product: "Miira Tiara"
+  },
+  {
+    name: "Sophie M.",
+    text: "Enfin des produits qui fonctionnent ! L'accompagnement personnalisé fait toute la différence.",
+    rating: 5,
+    product: "Miiralife"
+  }
+];
+// ==================== FIN DES VARIABLES CONFIGURABLES ====================
 
 const AffiliateSite = () => {
   const { id } = useParams();
@@ -28,10 +126,10 @@ const AffiliateSite = () => {
     message: "",
   });
 
-  const [appointmentForm, setAppointmentForm] = useState({
-    date: "",
-    time: "",
-    reason: "",
+  const [productForm, setProductForm] = useState({
+    product: "",
+    quantity: "1",
+    notes: "",
   });
 
   const [chatMessage, setChatMessage] = useState("");
@@ -41,14 +139,14 @@ const AffiliateSite = () => {
     setContactForm({ name: "", email: "", phone: "", message: "" });
   };
 
-  const handleAppointment = () => {
-    toast.success("Demande de rendez-vous envoyée!");
-    setAppointmentForm({ date: "", time: "", reason: "" });
+  const handleProductOrder = () => {
+    toast.success("Commande envoyée! Nous vous contactons pour finaliser.");
+    setProductForm({ product: "", quantity: "1", notes: "" });
   };
 
   const handleChatSend = () => {
     if (chatMessage.trim()) {
-      toast.success("Message envoyé au chatbot");
+      toast.success("Message envoyé");
       setChatMessage("");
     }
   };
@@ -56,65 +154,82 @@ const AffiliateSite = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-background/80 backdrop-blur-lg sticky top-0 z-50">
+      <header className="border-b border-green-200 bg-white/80 backdrop-blur-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="gradient-hero p-2 rounded-lg">
-              <Sparkles className="h-4 w-4 text-white" />
+          <div className="flex items-center gap-3">
+            <div className="bg-gradient-to-r from-green-500 to-green-600 p-2 rounded-lg shadow-lg">
+              <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="font-display font-bold">Dr. Jean Dupont</span>
+            <div>
+              <span className="font-display font-bold text-gray-900">{AFFILIATE_INFO.name}</span>
+              <p className="text-xs text-green-600">{AFFILIATE_INFO.title}</p>
+            </div>
           </div>
           <div className="flex items-center gap-4">
-            <a href="tel:+33123456789">
-              <Button variant="glass" size="sm">
+            <a href={`tel:${AFFILIATE_INFO.phone}`}>
+              <Button variant="outline" size="sm" className="border-green-300 text-green-700 hover:bg-green-50">
                 <Phone className="mr-2 h-4 w-4" />
                 Appeler
               </Button>
             </a>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="hero" size="sm">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Prendre RDV
+                <Button size="sm" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-lg">
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  Commander
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Prendre rendez-vous</DialogTitle>
+                  <DialogTitle>Commander un produit</DialogTitle>
                   <DialogDescription>
-                    Choisissez une date et un horaire
+                    Choisissez le produit qui vous intéresse
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                   <div>
-                    <Label htmlFor="date">Date</Label>
+                    <Label htmlFor="product">Produit</Label>
+                    <select 
+                      id="product"
+                      className="w-full p-2 border border-gray-300 rounded-md"
+                      value={productForm.product}
+                      onChange={(e) => setProductForm({...productForm, product: e.target.value})}
+                    >
+                      <option value="">Sélectionnez un produit</option>
+                      {PRODUCTS.map(product => (
+                        <option key={product.id} value={product.name}>
+                          {product.name} - {product.price}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <Label htmlFor="quantity">Quantité</Label>
                     <Input 
-                      id="date" 
-                      type="date"
-                      value={appointmentForm.date}
-                      onChange={(e) => setAppointmentForm({...appointmentForm, date: e.target.value})}
+                      id="quantity" 
+                      type="number"
+                      min="1"
+                      value={productForm.quantity}
+                      onChange={(e) => setProductForm({...productForm, quantity: e.target.value})}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="time">Heure</Label>
-                    <Input 
-                      id="time" 
-                      type="time"
-                      value={appointmentForm.time}
-                      onChange={(e) => setAppointmentForm({...appointmentForm, time: e.target.value})}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="reason">Motif</Label>
+                    <Label htmlFor="notes">Notes (optionnel)</Label>
                     <Textarea 
-                      id="reason"
-                      value={appointmentForm.reason}
-                      onChange={(e) => setAppointmentForm({...appointmentForm, reason: e.target.value})}
+                      id="notes"
+                      value={productForm.notes}
+                      onChange={(e) => setProductForm({...productForm, notes: e.target.value})}
                       rows={3}
+                      placeholder="Informations complémentaires..."
                     />
                   </div>
-                  <Button variant="hero" className="w-full" onClick={handleAppointment}>
-                    Confirmer le rendez-vous
+                  <Button 
+                    className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                    onClick={handleProductOrder}
+                    disabled={!productForm.product}
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4" />
+                    Demander un devis
                   </Button>
                 </div>
               </DialogContent>
@@ -123,159 +238,342 @@ const AffiliateSite = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 gradient-hero opacity-10" />
+      {/* Hero Section Attractive */}
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-green-50 via-white to-blue-50">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3')] bg-cover bg-center opacity-5"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl animate-fade-in-up">
-            <h1 className="text-5xl font-display font-bold mb-4">
-              Dr. Jean Dupont
-            </h1>
-            <p className="text-xl text-primary font-semibold mb-4">
-              Cardiologue - Spécialiste du cœur
-            </p>
-            <p className="text-lg text-muted-foreground mb-8">
-              Plus de 15 ans d'expérience en cardiologie. Je suis spécialisé dans le diagnostic et le traitement des maladies cardiovasculaires, avec une approche personnalisée pour chaque patient.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="hero" size="lg">
-                    <Calendar className="mr-2 h-5 w-5" />
-                    Prendre rendez-vous
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Prendre rendez-vous</DialogTitle>
-                    <DialogDescription>
-                      Choisissez une date et un horaire
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 py-4">
-                    <div>
-                      <Label htmlFor="apt-date">Date</Label>
-                      <Input 
-                        id="apt-date" 
-                        type="date"
-                        value={appointmentForm.date}
-                        onChange={(e) => setAppointmentForm({...appointmentForm, date: e.target.value})}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="apt-time">Heure</Label>
-                      <Input 
-                        id="apt-time" 
-                        type="time"
-                        value={appointmentForm.time}
-                        onChange={(e) => setAppointmentForm({...appointmentForm, time: e.target.value})}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="apt-reason">Motif</Label>
-                      <Textarea 
-                        id="apt-reason"
-                        value={appointmentForm.reason}
-                        onChange={(e) => setAppointmentForm({...appointmentForm, reason: e.target.value})}
-                        rows={3}
-                      />
-                    </div>
-                    <Button variant="hero" className="w-full" onClick={handleAppointment}>
-                      Confirmer le rendez-vous
-                    </Button>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in-up">
+              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-green-500/10 border border-green-400/20">
+                <Zap className="h-4 w-4 text-green-600" />
+                <span className="text-sm font-medium text-green-700">Conseillère Certifiée Revoobit</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 text-gray-900 leading-tight">
+                Transformez Votre
+                <span className="block bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent mt-2">
+                  Bien-être
+                </span>
+                Avec Revoobit
+              </h1>
+              
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                Rejoignez la révolution du bien-être cellulaire. En tant que conseillère certifiée Revoobit, 
+                je vous accompagne personnellement vers une santé optimale avec des produits innovants 
+                aux résultats prouvés.
+              </p>
+
+              <div className="flex items-center gap-6 mb-8">
+                <div className="flex items-center gap-2">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-current" />
+                    ))}
                   </div>
-                </DialogContent>
-              </Dialog>
-              <Button variant="glass" size="lg">
-                <Phone className="mr-2 h-5 w-5" />
-                Contacter
-              </Button>
+                  <span className="text-sm font-semibold text-gray-700">{AFFILIATE_INFO.rating}/5</span>
+                </div>
+                <div className="h-6 w-px bg-gray-300"></div>
+                <div className="text-sm text-gray-600">
+                  <span className="font-semibold">{AFFILIATE_INFO.reviews}+</span> clients satisfaits
+                </div>
+                <div className="h-6 w-px bg-gray-300"></div>
+                <div className="text-sm text-gray-600">
+                  Spécialiste <span className="font-semibold text-green-600">{AFFILIATE_INFO.specialty}</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-lg group">
+                      <ShoppingCart className="mr-2 h-5 w-5" />
+                      Découvrir les Produits
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Choisissez Votre Produit</DialogTitle>
+                      <DialogDescription>
+                        Sélectionnez le produit qui correspond à vos objectifs
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div>
+                        <Label htmlFor="hero-product">Produit</Label>
+                        <select 
+                          id="hero-product"
+                          className="w-full p-3 border border-gray-300 rounded-lg"
+                          value={productForm.product}
+                          onChange={(e) => setProductForm({...productForm, product: e.target.value})}
+                        >
+                          <option value="">Sélectionnez un produit</option>
+                          {PRODUCTS.map(product => (
+                            <option key={product.id} value={product.name}>
+                              {product.name} - {product.price}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <Button 
+                        className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                        onClick={handleProductOrder}
+                        disabled={!productForm.product}
+                      >
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Obtenir mon devis personnalisé
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+                <Button variant="outline" size="lg" className="border-green-300 text-green-700 hover:bg-green-50">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Consultation Gratuite
+                </Button>
+              </div>
+            </div>
+
+            <div className="relative animate-scale-in">
+              <div className="bg-white rounded-3xl p-8 shadow-2xl border border-green-200">
+                <div className="text-center mb-8">
+                  <div className="bg-gradient-to-r from-green-500 to-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Award className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Vos Avantages</h3>
+                  <p className="text-gray-600 mt-2">En choisissant mon accompagnement</p>
+                </div>
+                <div className="space-y-4">
+                  {BENEFITS.map((item, index) => (
+                    <div key={index} className="flex items-center gap-4 p-3 rounded-xl bg-green-50 group hover:bg-green-100 transition-colors">
+                      <div className="bg-white p-2 rounded-lg shadow-sm group-hover:scale-110 transition-transform">
+                        <item.icon className="h-5 w-5 text-green-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Informations */}
-      <section className="py-16 bg-muted/30">
+      {/* Products Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="gradient-glass border-border">
-              <CardContent className="pt-6">
-                <div className="gradient-primary p-3 rounded-xl w-fit mb-4 shadow-glow">
-                  <MapPin className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">Adresse</h3>
-                <p className="text-sm text-muted-foreground">
-                  123 Rue de la Santé<br />
-                  75013 Paris, France
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="gradient-glass border-border">
-              <CardContent className="pt-6">
-                <div className="gradient-secondary p-3 rounded-xl w-fit mb-4 shadow-glow">
-                  <Clock className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">Horaires</h3>
-                <p className="text-sm text-muted-foreground">
-                  Lundi - Vendredi<br />
-                  9h00 - 18h00
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="gradient-glass border-border">
-              <CardContent className="pt-6">
-                <div className="bg-accent p-3 rounded-xl w-fit mb-4 shadow-glow">
-                  <Phone className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="font-semibold mb-2">Contact</h3>
-                <p className="text-sm text-muted-foreground">
-                  +33 1 23 45 67 89<br />
-                  contact@jeandupont.com
-                </p>
-              </CardContent>
-            </Card>
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-green-500/10 border border-green-400/20">
+              <Sparkles className="h-4 w-4 text-green-600" />
+              <span className="text-sm font-medium text-green-700">Produits Exclusifs</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gray-900">
+              La Gamme <span className="bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">Revoobit</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Découvrez nos produits innovants de bien-être cellulaire, conçus pour des résultats optimaux
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Services */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-display font-bold mb-8 text-center">
-            Spécialités et <span className="gradient-hero bg-clip-text text-transparent">Services</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              "Consultation cardiologique",
-              "Électrocardiogramme (ECG)",
-              "Échographie cardiaque",
-              "Holter ECG et tensionnel",
-              "Épreuve d'effort",
-              "Suivi des maladies cardiovasculaires"
-            ].map((service) => (
-              <div key={service} className="gradient-glass border border-border rounded-xl p-4">
-                <p className="font-medium">{service}</p>
-              </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {PRODUCTS.map((product) => (
+              <Card key={product.id} className="group hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-green-200 relative overflow-hidden">
+                {product.badge && (
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-10 shadow-lg">
+                    {product.badge}
+                  </div>
+                )}
+                <CardContent className="p-8">
+                  <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 mb-6 group-hover:scale-105 transition-transform">
+                    <div className="w-24 h-24 bg-white rounded-full mx-auto flex items-center justify-center shadow-inner">
+                      <Heart className="h-10 w-10 text-green-600" />
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-2xl font-display font-semibold mb-3 text-gray-900 text-center">
+                    {product.name}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6 text-center leading-relaxed">
+                    {product.description}
+                  </p>
+                  
+                  <ul className="space-y-3 mb-6">
+                    {product.features.map((feature, index) => (
+                      <li key={index} className="flex items-center gap-3 text-sm">
+                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
+                      {product.price}
+                    </span>
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 group shadow-lg">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Commander Maintenant
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Commander {product.name}</DialogTitle>
+                        <DialogDescription>
+                          Remplissez le formulaire pour recevoir votre devis personnalisé
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        <div>
+                          <Label>Produit sélectionné</Label>
+                          <Input value={product.name} disabled className="bg-gray-50" />
+                        </div>
+                        <div>
+                          <Label htmlFor={`quantity-${product.id}`}>Quantité</Label>
+                          <Input 
+                            id={`quantity-${product.id}`}
+                            type="number"
+                            min="1"
+                            value={productForm.quantity}
+                            onChange={(e) => setProductForm({...productForm, quantity: e.target.value})}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor={`notes-${product.id}`}>Notes (optionnel)</Label>
+                          <Textarea 
+                            id={`notes-${product.id}`}
+                            value={productForm.notes}
+                            onChange={(e) => setProductForm({...productForm, notes: e.target.value})}
+                            rows={3}
+                            placeholder="Informations complémentaires..."
+                          />
+                        </div>
+                        <Button 
+                          className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                          onClick={handleProductOrder}
+                        >
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          Demander un devis personnalisé
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section className="py-16 bg-muted/30">
+      {/* Rest of the components remain the same with updated variables */}
+      {/* Informations Section */}
+      <section className="py-16 bg-gradient-to-r from-green-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <Card className="bg-white border-green-200 shadow-lg">
+              <CardContent className="pt-6">
+                <div className="bg-gradient-to-r from-green-500 to-green-600 p-3 rounded-xl w-fit mb-4 shadow-lg">
+                  <MapPin className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2 text-gray-900">Zone de couverture</h3>
+                <p className="text-sm text-gray-600">
+                  {AFFILIATE_INFO.zone}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white border-green-200 shadow-lg">
+              <CardContent className="pt-6">
+                <div className="bg-gradient-to-r from-green-500 to-green-600 p-3 rounded-xl w-fit mb-4 shadow-lg">
+                  <Clock className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2 text-gray-900">Disponibilité</h3>
+                <p className="text-sm text-gray-600">
+                  {AFFILIATE_INFO.horaires}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white border-green-200 shadow-lg">
+              <CardContent className="pt-6">
+                <div className="bg-gradient-to-r from-green-500 to-green-600 p-3 rounded-xl w-fit mb-4 shadow-lg">
+                  <Phone className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2 text-gray-900">Contact</h3>
+                <p className="text-sm text-gray-600">
+                  {AFFILIATE_INFO.phone}<br />
+                  {AFFILIATE_INFO.email}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gray-900">
+              Ils m'ont fait <span className="bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">confiance</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Découvrez les témoignages de clients satisfaits par mon accompagnement
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {TESTIMONIALS.map((testimonial, index) => (
+              <Card key={index} className="bg-gradient-to-br from-green-50 to-white border-green-200 shadow-lg hover:shadow-xl transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-gradient-to-r from-green-500 to-green-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                      <Users className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-gray-900">{testimonial.name}</h4>
+                      <div className="flex text-yellow-400">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-600 italic mb-4">"{testimonial.text}"</p>
+                  <div className="bg-green-100 rounded-lg p-3 text-center">
+                    <span className="text-green-800 font-semibold text-sm">Produit : {testimonial.product}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
-            <Card className="animate-scale-in">
-              <CardHeader>
-                <CardTitle>Nous contacter</CardTitle>
-                <CardDescription>
-                  Envoyez-nous un message, nous vous répondrons rapidement
+            <Card className="bg-white border-green-200 shadow-2xl">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-3xl text-gray-900">Discutons de vos objectifs</CardTitle>
+                <CardDescription className="text-lg">
+                  Recevez des conseils personnalisés pour votre bien-être
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-4">
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="contact-name">Nom complet</Label>
@@ -283,6 +581,7 @@ const AffiliateSite = () => {
                       id="contact-name"
                       value={contactForm.name}
                       onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                      className="border-green-200 focus:border-green-500"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -293,6 +592,7 @@ const AffiliateSite = () => {
                         type="email"
                         value={contactForm.email}
                         onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                        className="border-green-200 focus:border-green-500"
                       />
                     </div>
                     <div>
@@ -301,6 +601,7 @@ const AffiliateSite = () => {
                         id="contact-phone"
                         value={contactForm.phone}
                         onChange={(e) => setContactForm({...contactForm, phone: e.target.value})}
+                        className="border-green-200 focus:border-green-500"
                       />
                     </div>
                   </div>
@@ -311,39 +612,20 @@ const AffiliateSite = () => {
                       value={contactForm.message}
                       onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
                       rows={4}
+                      placeholder="Parlez-moi de vos objectifs bien-être et de vos attentes..."
+                      className="border-green-200 focus:border-green-500"
                     />
                   </div>
-                  <Button variant="hero" className="w-full" onClick={handleContact}>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 shadow-lg"
+                    onClick={handleContact}
+                  >
                     <Send className="mr-2 h-4 w-4" />
-                    Envoyer le message
+                    Envoyer ma demande
                   </Button>
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Documents */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-display font-bold mb-8 text-center">
-            Documents <span className="gradient-hero bg-clip-text text-transparent">à télécharger</span>
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { name: "Formulaire de consultation", size: "245 KB" },
-              { name: "Guide du patient", size: "1.2 MB" },
-              { name: "Recommandations post-consultation", size: "567 KB" }
-            ].map((doc) => (
-              <Card key={doc.name} className="gradient-glass border-border hover:border-primary/40 transition-smooth cursor-pointer">
-                <CardContent className="pt-6">
-                  <Download className="h-8 w-8 text-primary mb-3" />
-                  <h3 className="font-semibold mb-1">{doc.name}</h3>
-                  <p className="text-sm text-muted-foreground">{doc.size}</p>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
@@ -353,36 +635,40 @@ const AffiliateSite = () => {
         <Dialog>
           <DialogTrigger asChild>
             <Button 
-              variant="premium" 
               size="icon" 
-              className="h-14 w-14 rounded-full shadow-elegant"
+              className="h-14 w-14 rounded-full shadow-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
             >
               <MessageCircle className="h-6 w-6" />
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Assistant virtuel</DialogTitle>
+              <DialogTitle>Assistant Revoobit</DialogTitle>
               <DialogDescription>
-                Posez vos questions, je suis là pour vous aider
+                Questions sur nos produits ? Je vous réponds !
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-4">
-              <div className="h-64 border border-border rounded-lg p-4 overflow-y-auto bg-muted/30">
-                <div className="gradient-glass border border-border rounded-lg p-3 mb-3">
-                  <p className="text-sm">
-                    Bonjour! Comment puis-je vous aider aujourd'hui?
+              <div className="h-64 border border-green-200 rounded-lg p-4 overflow-y-auto bg-green-50">
+                <div className="bg-white border border-green-200 rounded-lg p-3 mb-3 shadow-sm">
+                  <p className="text-sm text-gray-700">
+                    Bonjour! Je suis votre assistant Revoobit. Comment puis-je vous aider dans votre démarche bien-être ?
                   </p>
                 </div>
               </div>
               <div className="flex gap-2">
                 <Input 
-                  placeholder="Tapez votre message..."
+                  placeholder="Posez votre question..."
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleChatSend()}
+                  className="border-green-200 focus:border-green-500"
                 />
-                <Button variant="hero" size="icon" onClick={handleChatSend}>
+                <Button 
+                  size="icon" 
+                  onClick={handleChatSend}
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700"
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
@@ -392,11 +678,27 @@ const AffiliateSite = () => {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 bg-muted/30">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            © 2025 Dr. Jean Dupont. Propulsé par <span className="font-semibold">Revoobit</span>
-          </p>
+      <footer className="bg-gradient-to-r from-green-900 to-green-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-3">
+              <div className="bg-white p-2 rounded-lg">
+                <Sparkles className="h-6 w-6 text-green-600" />
+              </div>
+              <div>
+                <span className="font-display font-bold text-lg">{AFFILIATE_INFO.name}</span>
+                <p className="text-green-200 text-sm">{AFFILIATE_INFO.title}</p>
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-green-200 mb-2">
+                Site professionnel généré automatiquement
+              </p>
+              <p className="text-green-300 text-sm">
+                © 2025 {AFFILIATE_INFO.name}. Partenaire officiel de <span className="font-semibold">Revoobit</span>
+              </p>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

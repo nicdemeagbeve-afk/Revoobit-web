@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
 import AffiliateSite from "./pages/AffiliateSite";
 import NotFound from "./pages/NotFound";
+import LoginPage from "./pages/LoginPage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/affiliate/:id" element={<AffiliateDashboard />} />
           <Route path="/site/:id" element={<AffiliateSite />} />
