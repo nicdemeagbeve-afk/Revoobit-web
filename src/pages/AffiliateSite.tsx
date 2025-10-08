@@ -61,7 +61,7 @@ const PRODUCTS = [
     badge: "Nouveau",
     image: "/assets/mira-cell.png"
   },
-  },
+
   {
     id: 3,
     name: "Miiralife",

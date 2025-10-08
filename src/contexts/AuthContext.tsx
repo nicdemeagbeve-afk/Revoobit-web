@@ -29,6 +29,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  SignUp: (email: string, password: string, fullName: string) => Promise<{ error: Error | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -104,6 +105,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+ 
+
   const signIn = async (email: string, password: string) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -141,6 +144,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     navigate('/login');
   };
 
+const signUp = async (email: string, password: string, fullName: string) => {
+  try {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) throw error;
+
+    if (data.user) {
+      await supabase.from('profiles').upsert({
+        id: data.user.id,
+        email: data.user.email,
+        full_name: fullName,
+        role: 'admin'
+      });
+    }
+
+    return { error: null };
+  } catch (error: any) {
+    return { error };
+  }
+};
+  const SignUp = signUp;
+
   return (
     <AuthContext.Provider
       value={{
@@ -152,6 +176,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signIn,
         signOut,
         refreshProfile,
+        SignUp,
       }}
     >
       {children}

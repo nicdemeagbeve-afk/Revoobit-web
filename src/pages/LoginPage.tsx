@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   Eye,
@@ -15,8 +15,10 @@ import {
   Heart,
   Sparkles,
   Shield,
-  User
+  User,
+  Smartphone 
 } from "lucide-react";
+
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -219,6 +221,10 @@ const LoginPage = () => {
                     )}
                   </Button>
                 </form>
+                <p className="text-sm text-gray-600 mt-4">
+                Pas encore de compte ? <Link to="/signup" className="text-green-600 font-medium">S'inscrire</Link>
+                </p>
+
 
 
                 {/* Security Notice */}

@@ -9,6 +9,15 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+// Test de connexion simple
+supabase.from('profiles').select('*').limit(1).then(({ data, error }) => {
+  if (error) {
+    console.error("❌ Erreur connexion Supabase:", error.message);
+  } else {
+    console.log("✅ Connexion Supabase réussie, profils:", data);
+  }
+});
+
 export type Database = {
   public: {
     Tables: {

@@ -9,6 +9,8 @@ import AffiliateSite from "./pages/AffiliateSite";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import WizardStep1 from "./pages/wizard/WizardStep1";
+import SignupPage from "./pages/SignupPage"; // importer la page que nous avons créée
+
 
 const App = () => (
   <TooltipProvider>
@@ -16,6 +18,8 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+
         <Route
           path="/admin"
           element={
