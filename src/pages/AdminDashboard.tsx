@@ -23,15 +23,16 @@ import {
 
 const AdminDashboard = () => {
   const [affiliates, setAffiliates] = useState([
-    { id: 1, name: "Dr. Jean Dupont", email: "jean@example.com", specialty: "Cardiologie", status: "active", subdomain: "jeandupont" },
-    { id: 2, name: "Dr. Marie Martin", email: "marie@example.com", specialty: "Dermatologie", status: "active", subdomain: "mariemartin" },
-    { id: 3, name: "Cabinet XYZ", email: "contact@xyz.com", specialty: "Médecine générale", status: "suspended", subdomain: "cabinetxyz" },
+    { id: 1, name: "Dr. Jean Dupont", email: "jean@example.com", specialty: "Etudiant", status: "active", subdomain: "jeandupont", password: "" },
+    { id: 2, name: "Dr. Marie Martin", email: "marie@example.com", specialty: "Dermatologie", status: "active", subdomain: "mariemartin", password: "" },
+    { id: 3, name: "M.  Nicodème AGBEVE", email: "larsonnicky547@gmail.com", specialty: "Médecine générale", status: "suspended", subdomain: "Forma-link", password: "" },
   ]);
 
   const [newAffiliate, setNewAffiliate] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    password: "",
     phone: "",
     specialty: "",
     subdomain: "",
@@ -45,6 +46,7 @@ const AdminDashboard = () => {
       specialty: newAffiliate.specialty,
       status: "active" as const,
       subdomain: newAffiliate.subdomain,
+      password: newAffiliate.password, // <-- Ajoutez cette ligne
     };
     
     setAffiliates([...affiliates, affiliate]);
@@ -53,6 +55,7 @@ const AdminDashboard = () => {
       firstName: "",
       lastName: "",
       email: "",
+      password: "",
       phone: "",
       specialty: "",
       subdomain: "",
@@ -88,9 +91,9 @@ const AdminDashboard = () => {
           {/* Header */}
           <div className="mb-8 animate-fade-in">
             <h1 className="text-4xl font-display font-bold mb-2">
-              Dashboard <span className="gradient-hero bg-clip-text text-white">Administrateur</span>
+              <span className="gradient-hero bg-clip-text text-white">Administrateur</span>
             </h1>
-            <p className="text-muted-foreground">Gérez votre plateforme et vos affiliés</p>
+            <p className="text-muted-foreground">Gérez la succès Family , Grâce a votre Tableau de bord</p>
           </div>
 
           {/* Stats Cards */}
@@ -155,6 +158,13 @@ const AdminDashboard = () => {
                       value={newAffiliate.email}
                       onChange={(e) => setNewAffiliate({...newAffiliate, email: e.target.value})}
                     />
+                    <Label htmlFor="password">Mot de passe</Label>
+                    <Input 
+                      id="password" 
+                      type="password"
+                      value={newAffiliate.password}
+                      onChange={(e) => setNewAffiliate({...newAffiliate, password: e.target.value})}
+                    />
                   </div>
                   <div>
                     <Label htmlFor="phone">Téléphone</Label>
@@ -166,20 +176,11 @@ const AdminDashboard = () => {
                   </div>
                   <div>
                     <Label htmlFor="specialty">Spécialité</Label>
-                    <Select 
+                    <Input 
+                      id="specialty"
                       value={newAffiliate.specialty}
-                      onValueChange={(value) => setNewAffiliate({...newAffiliate, specialty: value})}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionner" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Cardiologie">Cardiologie</SelectItem>
-                        <SelectItem value="Dermatologie">Dermatologie</SelectItem>
-                        <SelectItem value="Médecine générale">Médecine générale</SelectItem>
-                        <SelectItem value="Pédiatrie">Pédiatrie</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      onChange={(e) => setNewAffiliate({...newAffiliate, specialty: e.target.value})}
+                    />
                   </div>
                   <div>
                     <Label htmlFor="subdomain">Sous-domaine</Label>
@@ -216,7 +217,7 @@ const AdminDashboard = () => {
                 <div className="space-y-4 py-4">
                   <div>
                     <Label htmlFor="platformName">Nom de la plateforme</Label>
-                    <Input id="platformName" defaultValue="Revoobit" />
+                    <Input id="platformName" defaultValue="Succès Familly" />
                   </div>
                   <div>
                     <Label htmlFor="primaryColor">Couleur principale</Label>
@@ -254,7 +255,8 @@ const AdminDashboard = () => {
                         <div className="text-sm text-muted-foreground space-y-1">
                           <p>📧 {affiliate.email}</p>
                           <p>🏥 {affiliate.specialty}</p>
-                          <p>🌐 {affiliate.subdomain}.revoobit.com</p>
+                          <p>🌐 {affiliate.subdomain}.SuccesFamily.com</p>
+                          <p>🔒 {affiliate.password} </p>
                         </div>
                       </div>
                       
