@@ -20,12 +20,13 @@ import {
   Edit,
   TrendingUp
 } from "lucide-react";
+import { profile } from "console";
 
 const AdminDashboard = () => {
   const [affiliates, setAffiliates] = useState([
-    { id: 1, name: "Dr. Jean Dupont", email: "jean@example.com", specialty: "Etudiant", status: "active", subdomain: "jeandupont", password: "" },
-    { id: 2, name: "Dr. Marie Martin", email: "marie@example.com", specialty: "Dermatologie", status: "active", subdomain: "mariemartin", password: "" },
-    { id: 3, name: "M.  Nicodème AGBEVE", email: "larsonnicky547@gmail.com", specialty: "Médecine générale", status: "suspended", subdomain: "Forma-link", password: "" },
+    { id: 1, name: "Dr. Jean Dupont", email: "jean@example.com", specialty: "Etudiant", status: "active", subdomain: "jeandupont", password: "", profilePicture: "" },
+    { id: 2, name: "Dr. Marie Martin", email: "marie@example.com", specialty: "Dermatologie", status: "active", subdomain: "mariemartin", password: "", profilePicture: "" },
+    { id: 3, name: "M.  Nicodème AGBEVE", email: "larsonnicky547@gmail.com", specialty: "Médecine générale", status: "suspended", subdomain: "Forma-link", password: "", profilePicture: "" },
   ]);
 
   const [newAffiliate, setNewAffiliate] = useState({
@@ -36,6 +37,7 @@ const AdminDashboard = () => {
     phone: "",
     specialty: "",
     subdomain: "",
+    profilePicture: "", // <-- Ajoutez cette ligne
   });
 
   const handleCreateAffiliate = () => {
@@ -47,6 +49,7 @@ const AdminDashboard = () => {
       status: "active" as const,
       subdomain: newAffiliate.subdomain,
       password: newAffiliate.password, // <-- Ajoutez cette ligne
+      profilePicture: newAffiliate.profilePicture, // <-- Ajoutez cette ligne
     };
     
     setAffiliates([...affiliates, affiliate]);
@@ -59,6 +62,7 @@ const AdminDashboard = () => {
       phone: "",
       specialty: "",
       subdomain: "",
+      profilePicture: "", // <-- Réinitialisez cette ligne
     });
   };
 
@@ -133,6 +137,24 @@ const AdminDashboard = () => {
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-2 gap-4">
+                   <div>
+                      <Label htmlFor="profilePicture">Photo de profil</Label>
+                      <Input
+                        id="profilePicture"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              setNewAffiliate({ ...newAffiliate, profilePicture: reader.result as string });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                   </div>
                     <div>
                       <Label htmlFor="firstName">Prénom</Label>
                       <Input 
@@ -221,7 +243,7 @@ const AdminDashboard = () => {
                   </div>
                   <div>
                     <Label htmlFor="primaryColor">Couleur principale</Label>
-                    <Input id="primaryColor" type="color" defaultValue="#3b82f6" />
+                    <Input id="primaryColor" type="color" defaultValue="" />
                   </div>
                   <Button variant="hero" className="w-full" onClick={() => toast.success("Configuration enregistrée!")}>
                     Enregistrer
@@ -284,6 +306,13 @@ const AdminDashboard = () => {
                         </Button>
                       </div>
                     </div>
+                    {affiliate.profilePicture && (
+                      <img
+                        src={affiliate.profilePicture}
+                        alt="Photo de profil"
+                        className="w-10 h-10 rounded-full object-cover mb-2"
+                      />
+                    )}
                   </div>
                 ))}
               </div>

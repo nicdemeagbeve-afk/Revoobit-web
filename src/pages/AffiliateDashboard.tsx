@@ -32,6 +32,7 @@ const AffiliateDashboard = () => {
     phone: "+33 1 23 45 67 89",
     email: "contact@jeandupont.com",
     hours: "Lun-Ven: 9h-18h",
+    profilePicture: "", // Ajout
   });
 
   const stats = [
@@ -214,6 +215,33 @@ const AffiliateDashboard = () => {
                         <Button variant="glass">
                           Choisir des fichiers
                         </Button>
+                      </div>
+                      // ...dans TabsContent value="media"...
+                      <div>
+                        <Label htmlFor="profilePicture">Photo de profil</Label>
+                        <Input
+                          id="profilePicture"
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onloadend = () => {
+                                setSiteData({ ...siteData, profilePicture: reader.result as string });
+                                toast.success("Photo de profil enregistrée!");
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                        {siteData.profilePicture && (
+                          <img
+                            src={siteData.profilePicture}
+                            alt="Photo de profil"
+                            className="w-24 h-24 rounded-full mt-4 object-cover"
+                          />
+                        )}
                       </div>
                     </TabsContent>
                   </Tabs>

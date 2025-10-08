@@ -27,8 +27,9 @@ const LoginPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [role, setRole] = useState<"admin" | "affiliate">("admin");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleAdminSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -50,6 +51,31 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   };
+  const handleAffiliateSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  // Simulation de l'authentification
+  try {
+    // Ici vous intégrerez votre logique d'authentification réelle
+    if (formData.email && formData.password) {
+      // Simuler un délai d'authentification
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Stocker l'utilisateur connecté (ici juste l'email)
+      localStorage.setItem("affiliateEmail", formData.email);
+
+      toast.success("Connexion réussie !");
+      navigate("/affiliate-dashboard");
+    } else {
+      toast.error("Veuillez remplir tous les champs");
+    }
+  } catch (error) {
+    toast.error("Erreur de connexion. Vérifiez vos identifiants.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleDemoLogin = (role: string) => {
     setFormData({
@@ -136,7 +162,7 @@ const LoginPage = () => {
               </CardHeader>
 
               <CardContent className="space-y-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={role === "admin" ? handleAdminSubmit : handleAffiliateSubmit} className="space-y-4">
                   {/* Email Field */}
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-gray-700">
@@ -225,7 +251,7 @@ const LoginPage = () => {
                         Connexion...
                       </>
                     ) : (
-                      "Se connecter"
+                      role === "admin" ? "Se connecter Admin" : "Se connecter Affilié"
                     )}
                   </Button>
                 </form>
@@ -259,6 +285,7 @@ const LoginPage = () => {
                     <Smartphone className="mr-2 h-4 w-4" />
                     Manager
                   </Button>
+                  
                 </div>
 
                 {/* Security Notice */}
