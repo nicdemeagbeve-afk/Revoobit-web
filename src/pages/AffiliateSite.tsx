@@ -35,7 +35,7 @@ const AFFILIATE_INFO = {
   title: "Conseillère Santé Certifiée",
   phone: "+33 1 23 45 67 89",
   email: "jean@revoobit.com",
-  zone: "Île-de-France et France entière",
+  zone: "Region de la savanes/Togo",
   horaires: "Lundi - Samedi • 9h00 - 20h00",
   rating: 4.9,
   reviews: 127,
@@ -59,7 +59,7 @@ const PRODUCTS = [
     price: "89,00 €",
     features: ["Éclat immédiat", "Hydratation profonde", "Anti-âge naturel", "Peau repulpée"],
     badge: "Nouveau",
-    image: "/images/miira-tiara.png"
+    image: miiratiara.png
   },
   {
     id: 3,
