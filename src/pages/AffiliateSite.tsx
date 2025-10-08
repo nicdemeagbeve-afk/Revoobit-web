@@ -59,7 +59,8 @@ const PRODUCTS = [
     price: "89,00 €",
     features: ["Éclat immédiat", "Hydratation profonde", "Anti-âge naturel", "Peau repulpée"],
     badge: "Nouveau",
-    image: miiratiara.png
+    image: "/assets/mira-cell.png"
+  },
   },
   {
     id: 3,
