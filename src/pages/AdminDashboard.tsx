@@ -1,106 +1,228 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { 
-  Users, 
-  Globe, 
-  BarChart3, 
-  Plus,
-  Settings,
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
+import {
+  Users,
+  Globe,
+  BarChart3,
   UserPlus,
+  Settings,
   Power,
   Trash2,
   Edit,
   TrendingUp
 } from "lucide-react";
-import { profile } from "console";
+
+interface Affiliate {
+  id: string;
+  user_id: string;
+  company_name: string | null;
+  phone: string | null;
+  address: string | null;
+  status: 'active' | 'inactive' | 'suspended';
+  is_first_login: boolean;
+  created_at: string;
+  profiles: {
+    email: string;
+    full_name: string | null;
+  };
+}
 
 const AdminDashboard = () => {
-  const [affiliates, setAffiliates] = useState([
-    { id: 1, name: "Dr. Jean Dupont", email: "jean@example.com", specialty: "Etudiant", status: "active", subdomain: "jeandupont", password: "", profilePicture: "" },
-    { id: 2, name: "Dr. Marie Martin", email: "marie@example.com", specialty: "Dermatologie", status: "active", subdomain: "mariemartin", password: "", profilePicture: "" },
-    { id: 3, name: "M.  Nicodème AGBEVE", email: "larsonnicky547@gmail.com", specialty: "Médecine générale", status: "suspended", subdomain: "Forma-link", password: "", profilePicture: "" },
-  ]);
-
+  const { profile, signOut } = useAuth();
+  const [affiliates, setAffiliates] = useState<Affiliate[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [newAffiliate, setNewAffiliate] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     phone: "",
-    specialty: "",
-    subdomain: "",
-    profilePicture: "", // <-- Ajoutez cette ligne
+    companyName: "",
   });
 
-  const handleCreateAffiliate = () => {
-    const affiliate = {
-      id: affiliates.length + 1,
-      name: `${newAffiliate.firstName} ${newAffiliate.lastName}`,
-      email: newAffiliate.email,
-      specialty: newAffiliate.specialty,
-      status: "active" as const,
-      subdomain: newAffiliate.subdomain,
-      password: newAffiliate.password, // <-- Ajoutez cette ligne
-      profilePicture: newAffiliate.profilePicture, // <-- Ajoutez cette ligne
-    };
-    
-    setAffiliates([...affiliates, affiliate]);
-    toast.success("Affilié créé avec succès!");
-    setNewAffiliate({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      phone: "",
-      specialty: "",
-      subdomain: "",
-      profilePicture: "", // <-- Réinitialisez cette ligne
-    });
+  useEffect(() => {
+    fetchAffiliates();
+  }, []);
+
+  const fetchAffiliates = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('affiliates')
+        .select(`
+          *,
+          profiles (
+            email,
+            full_name
+          )
+        `)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setAffiliates(data || []);
+    } catch (error) {
+      console.error('Error fetching affiliates:', error);
+      toast.error("Erreur lors du chargement des affiliés");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const toggleStatus = (id: number) => {
-    setAffiliates(affiliates.map(a => 
-      a.id === id 
-        ? { ...a, status: a.status === "active" ? "suspended" : "active" } 
-        : a
-    ));
-    toast.success("Statut mis à jour");
+  const handleCreateAffiliate = async () => {
+    if (!newAffiliate.email || !newAffiliate.password || !newAffiliate.firstName) {
+      toast.error("Veuillez remplir tous les champs obligatoires");
+      return;
+    }
+
+    try {
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: newAffiliate.email,
+        password: newAffiliate.password,
+        options: {
+          data: {
+            role: 'affiliate',
+            full_name: `${newAffiliate.firstName} ${newAffiliate.lastName}`.trim(),
+          },
+        },
+      });
+
+      if (authError) throw authError;
+
+      if (authData.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .update({
+            full_name: `${newAffiliate.firstName} ${newAffiliate.lastName}`.trim()
+          })
+          .eq('id', authData.user.id);
+
+        if (profileError) console.error('Profile update error:', profileError);
+
+        const { error: affiliateError } = await supabase
+          .from('affiliates')
+          .insert({
+            user_id: authData.user.id,
+            company_name: newAffiliate.companyName || null,
+            phone: newAffiliate.phone || null,
+            status: 'active',
+            created_by: profile?.id,
+            is_first_login: true,
+          });
+
+        if (affiliateError) throw affiliateError;
+
+        toast.success("Affilié créé avec succès!");
+        setNewAffiliate({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          phone: "",
+          companyName: "",
+        });
+        setDialogOpen(false);
+        fetchAffiliates();
+      }
+    } catch (error: any) {
+      console.error('Error creating affiliate:', error);
+      toast.error(error.message || "Erreur lors de la création de l'affilié");
+    }
   };
 
-  const deleteAffiliate = (id: number) => {
-    setAffiliates(affiliates.filter(a => a.id !== id));
-    toast.success("Affilié supprimé");
+  const toggleStatus = async (id: string, currentStatus: string) => {
+    const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+
+    try {
+      const { error } = await supabase
+        .from('affiliates')
+        .update({ status: newStatus })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast.success("Statut mis à jour");
+      fetchAffiliates();
+    } catch (error) {
+      console.error('Error updating status:', error);
+      toast.error("Erreur lors de la mise à jour");
+    }
+  };
+
+  const deleteAffiliate = async (id: string) => {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer cet affilié?")) return;
+
+    try {
+      const { error } = await supabase
+        .from('affiliates')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast.success("Affilié supprimé");
+      fetchAffiliates();
+    } catch (error) {
+      console.error('Error deleting affiliate:', error);
+      toast.error("Erreur lors de la suppression");
+    }
   };
 
   const stats = [
-    { label: "Affiliés actifs", value: affiliates.filter(a => a.status === "active").length, icon: Users, color: "text-primary" },
-    { label: "Mini-sites", value: affiliates.length, icon: Globe, color: "text-secondary" },
-    { label: "Visites totales", value: "12.5K", icon: TrendingUp, color: "text-accent" },
+    {
+      label: "Affiliés actifs",
+      value: affiliates.filter(a => a.status === "active").length,
+      icon: Users,
+      color: "text-primary"
+    },
+    {
+      label: "Total affiliés",
+      value: affiliates.length,
+      icon: Globe,
+      color: "text-secondary"
+    },
+    {
+      label: "Statistiques",
+      value: "N/A",
+      icon: TrendingUp,
+      color: "text-accent"
+    },
   ];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <div className="pt-24 pb-12">
         <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="mb-8 animate-fade-in">
-            <h1 className="text-4xl font-display font-bold mb-2">
-              <span className="gradient-hero bg-clip-text text-white">Administrateur</span>
-            </h1>
-            <p className="text-muted-foreground">Gérez la succès Family , Grâce a votre Tableau de bord</p>
+          <div className="mb-8 flex justify-between items-center animate-fade-in">
+            <div>
+              <h1 className="text-4xl font-display font-bold mb-2">
+                <span className="gradient-hero bg-clip-text text-transparent">Administration</span>
+              </h1>
+              <p className="text-muted-foreground">Bienvenue, {profile?.full_name || profile?.email}</p>
+            </div>
+            <Button onClick={signOut} variant="outline">
+              Déconnexion
+            </Button>
           </div>
 
-          {/* Stats Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-8 animate-fade-in-up">
             {stats.map((stat) => (
               <Card key={stat.label} className="gradient-glass border-border hover:border-primary/40 transition-smooth">
@@ -110,7 +232,7 @@ const AdminDashboard = () => {
                       <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
                       <p className="text-3xl font-bold">{stat.value}</p>
                     </div>
-                    <div className={`gradient-primary p-3 rounded-xl shadow-glow`}>
+                    <div className="gradient-primary p-3 rounded-xl shadow-glow">
                       <stat.icon className="h-6 w-6 text-white" />
                     </div>
                   </div>
@@ -119,9 +241,8 @@ const AdminDashboard = () => {
             ))}
           </div>
 
-          {/* Actions */}
           <div className="flex flex-wrap gap-4 mb-8">
-            <Dialog>
+            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="hero" size="lg">
                   <UserPlus className="mr-2 h-5 w-5" />
@@ -137,35 +258,18 @@ const AdminDashboard = () => {
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-2 gap-4">
-                   <div>
-                      <Label htmlFor="profilePicture">Photo de profil</Label>
-                      <Input
-                        id="profilePicture"
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            const reader = new FileReader();
-                            reader.onloadend = () => {
-                              setNewAffiliate({ ...newAffiliate, profilePicture: reader.result as string });
-                            };
-                            reader.readAsDataURL(file);
-                          }
-                        }}
-                      />
-                   </div>
                     <div>
-                      <Label htmlFor="firstName">Prénom</Label>
-                      <Input 
-                        id="firstName" 
+                      <Label htmlFor="firstName">Prénom *</Label>
+                      <Input
+                        id="firstName"
                         value={newAffiliate.firstName}
                         onChange={(e) => setNewAffiliate({...newAffiliate, firstName: e.target.value})}
+                        required
                       />
                     </div>
                     <div>
                       <Label htmlFor="lastName">Nom</Label>
-                      <Input 
+                      <Input
                         id="lastName"
                         value={newAffiliate.lastName}
                         onChange={(e) => setNewAffiliate({...newAffiliate, lastName: e.target.value})}
@@ -173,47 +277,40 @@ const AdminDashboard = () => {
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
                       type="email"
                       value={newAffiliate.email}
                       onChange={(e) => setNewAffiliate({...newAffiliate, email: e.target.value})}
+                      required
                     />
-                    <Label htmlFor="password">Mot de passe</Label>
-                    <Input 
-                      id="password" 
+                  </div>
+                  <div>
+                    <Label htmlFor="password">Mot de passe *</Label>
+                    <Input
+                      id="password"
                       type="password"
                       value={newAffiliate.password}
                       onChange={(e) => setNewAffiliate({...newAffiliate, password: e.target.value})}
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="phone">Téléphone</Label>
-                    <Input 
+                    <Input
                       id="phone"
                       value={newAffiliate.phone}
                       onChange={(e) => setNewAffiliate({...newAffiliate, phone: e.target.value})}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="specialty">Spécialité</Label>
-                    <Input 
-                      id="specialty"
-                      value={newAffiliate.specialty}
-                      onChange={(e) => setNewAffiliate({...newAffiliate, specialty: e.target.value})}
+                    <Label htmlFor="companyName">Nom de l'entreprise</Label>
+                    <Input
+                      id="companyName"
+                      value={newAffiliate.companyName}
+                      onChange={(e) => setNewAffiliate({...newAffiliate, companyName: e.target.value})}
                     />
-                  </div>
-                  <div>
-                    <Label htmlFor="subdomain">Sous-domaine</Label>
-                    <div className="flex items-center gap-2">
-                      <Input 
-                        id="subdomain"
-                        value={newAffiliate.subdomain}
-                        onChange={(e) => setNewAffiliate({...newAffiliate, subdomain: e.target.value})}
-                      />
-                      <span className="text-sm text-muted-foreground">.revoobit.com</span>
-                    </div>
                   </div>
                 </div>
                 <Button onClick={handleCreateAffiliate} variant="hero" className="w-full">
@@ -221,101 +318,68 @@ const AdminDashboard = () => {
                 </Button>
               </DialogContent>
             </Dialog>
-
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="glass">
-                  <Settings className="mr-2 h-5 w-5" />
-                  Configuration
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Configuration de la plateforme</DialogTitle>
-                  <DialogDescription>
-                    Personnalisez l'apparence et les paramètres
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4 py-4">
-                  <div>
-                    <Label htmlFor="platformName">Nom de la plateforme</Label>
-                    <Input id="platformName" defaultValue="Succès Familly" />
-                  </div>
-                  <div>
-                    <Label htmlFor="primaryColor">Couleur principale</Label>
-                    <Input id="primaryColor" type="color" defaultValue="" />
-                  </div>
-                  <Button variant="hero" className="w-full" onClick={() => toast.success("Configuration enregistrée!")}>
-                    Enregistrer
-                  </Button>
-                </div>
-              </DialogContent>
-            </Dialog>
           </div>
 
-          {/* Affiliates List */}
           <Card className="animate-scale-in">
             <CardHeader>
               <CardTitle>Liste des affiliés</CardTitle>
-              <CardDescription>Gérez vos affiliés et leurs mini-sites</CardDescription>
+              <CardDescription>Gérez vos affiliés</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {affiliates.map((affiliate) => (
-                  <div 
-                    key={affiliate.id}
-                    className="gradient-glass border border-border rounded-xl p-4 hover:border-primary/40 transition-smooth"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-lg">{affiliate.name}</h3>
-                          <Badge variant={affiliate.status === "active" ? "default" : "secondary"}>
-                            {affiliate.status === "active" ? "Actif" : "Suspendu"}
-                          </Badge>
+              {affiliates.length === 0 ? (
+                <p className="text-center text-muted-foreground py-8">
+                  Aucun affilié pour le moment
+                </p>
+              ) : (
+                <div className="space-y-4">
+                  {affiliates.map((affiliate) => (
+                    <div
+                      key={affiliate.id}
+                      className="gradient-glass border border-border rounded-xl p-4 hover:border-primary/40 transition-smooth"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="font-semibold text-lg">
+                              {affiliate.profiles?.full_name || 'Sans nom'}
+                            </h3>
+                            <Badge variant={affiliate.status === "active" ? "default" : "secondary"}>
+                              {affiliate.status === "active" ? "Actif" : affiliate.status === "inactive" ? "Inactif" : "Suspendu"}
+                            </Badge>
+                            {affiliate.is_first_login && (
+                              <Badge variant="outline">Nouveau</Badge>
+                            )}
+                          </div>
+                          <div className="text-sm text-muted-foreground space-y-1">
+                            <p>📧 {affiliate.profiles?.email}</p>
+                            {affiliate.company_name && <p>🏢 {affiliate.company_name}</p>}
+                            {affiliate.phone && <p>📞 {affiliate.phone}</p>}
+                          </div>
                         </div>
-                        <div className="text-sm text-muted-foreground space-y-1">
-                          <p>📧 {affiliate.email}</p>
-                          <p>🏥 {affiliate.specialty}</p>
-                          <p>🌐 {affiliate.subdomain}.SuccesFamily.com</p>
-                          <p>🔒 {affiliate.password} </p>
+
+                        <div className="flex gap-2">
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => toggleStatus(affiliate.id, affiliate.status)}
+                            title={affiliate.status === 'active' ? 'Désactiver' : 'Activer'}
+                          >
+                            <Power className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => deleteAffiliate(affiliate.id)}
+                            title="Supprimer"
+                          >
+                            <Trash2 className="h-4 w-4 text-destructive" />
+                          </Button>
                         </div>
-                      </div>
-                      
-                      <div className="flex gap-2">
-                        <Button 
-                          size="icon" 
-                          variant="ghost"
-                          onClick={() => toast.success("Édition en cours...")}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button 
-                          size="icon" 
-                          variant="ghost"
-                          onClick={() => toggleStatus(affiliate.id)}
-                        >
-                          <Power className="h-4 w-4" />
-                        </Button>
-                        <Button 
-                          size="icon" 
-                          variant="ghost"
-                          onClick={() => deleteAffiliate(affiliate.id)}
-                        >
-                          <Trash2 className="h-4 w-4 text-destructive" />
-                        </Button>
                       </div>
                     </div>
-                    {affiliate.profilePicture && (
-                      <img
-                        src={affiliate.profilePicture}
-                        alt="Photo de profil"
-                        className="w-10 h-10 rounded-full object-cover mb-2"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

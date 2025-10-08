@@ -1,25 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Link, useNavigate } from "react-router-dom";
-import { 
-  Eye, 
-  EyeOff, 
-  Mail, 
-  Lock, 
-  Heart, 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  Heart,
   Sparkles,
   Shield,
-  Smartphone,
   User
 } from "lucide-react";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { signIn, user } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,21 +28,26 @@ const LoginPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [role, setRole] = useState<"admin" | "affiliate">("admin");
 
-  const handleAdminSubmit = async (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulation de l'authentification
     try {
-      // Ici vous intégrerez votre logique d'authentification réelle
       if (formData.email && formData.password) {
-        // Simuler un délai d'authentification
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        toast.success("Connexion réussie !");
-        navigate("/admin");
+        const { error } = await signIn(formData.email, formData.password);
+
+        if (error) {
+          toast.error("Email ou mot de passe incorrect");
+        } else {
+          toast.success("Connexion réussie !");
+        }
       } else {
         toast.error("Veuillez remplir tous les champs");
       }
@@ -50,40 +56,6 @@ const LoginPage = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-  const handleAffiliateSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-
-  // Simulation de l'authentification
-  try {
-    // Ici vous intégrerez votre logique d'authentification réelle
-    if (formData.email && formData.password) {
-      // Simuler un délai d'authentification
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Stocker l'utilisateur connecté (ici juste l'email)
-      localStorage.setItem("affiliateEmail", formData.email);
-
-      toast.success("Connexion réussie !");
-      navigate("/affiliate-dashboard");
-    } else {
-      toast.error("Veuillez remplir tous les champs");
-    }
-  } catch (error) {
-    toast.error("Erreur de connexion. Vérifiez vos identifiants.");
-  } finally {
-    setIsLoading(false);
-  }
-};
-
-  const handleDemoLogin = (role: string) => {
-    setFormData({
-      email: `${role}@revoobit.com`,
-      password: "demo123",
-      rememberMe: false
-    });
-    toast.info(`Mode démo ${role} activé`);
   };
 
   return (
@@ -162,7 +134,7 @@ const LoginPage = () => {
               </CardHeader>
 
               <CardContent className="space-y-6">
-                <form onSubmit={role === "admin" ? handleAdminSubmit : handleAffiliateSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Email Field */}
                   <div className="space-y-2">
                     <Label htmlFor="email" className="text-gray-700">
@@ -184,17 +156,9 @@ const LoginPage = () => {
 
                   {/* Password Field */}
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="password" className="text-gray-700">
-                        Mot de passe
-                      </Label>
-                      <Link 
-                        to="/forgot-password" 
-                        className="text-sm text-green-600 hover:text-green-700 hover:underline"
-                      >
-                        Mot de passe oublié ?
-                      </Link>
-                    </div>
+                    <Label htmlFor="password" className="text-gray-700">
+                      Mot de passe
+                    </Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
@@ -232,9 +196,9 @@ const LoginPage = () => {
                           setFormData({ ...formData, rememberMe: checked as boolean })
                         }
                       />
-                      <Label htmlFor="rememberMe" className="text-sm text-gray-600">
+                      <label htmlFor="rememberMe" className="text-sm text-gray-600 cursor-pointer">
                         Se souvenir de moi
-                      </Label>
+                      </label>
                     </div>
                   </div>
 
@@ -251,42 +215,11 @@ const LoginPage = () => {
                         Connexion...
                       </>
                     ) : (
-                      role === "admin" ? "Se connecter Admin" : "Se connecter Affilié"
+                      "Se connecter"
                     )}
                   </Button>
                 </form>
 
-                {/* Demo Access Section */}
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-gray-300" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="bg-white px-2 text-gray-500">Accès démo</span>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <Button
-                    variant="outline"
-                    className="border-green-200 text-green-700 hover:bg-green-50"
-                    onClick={() => handleDemoLogin("admin")}
-                    disabled={isLoading}
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    Admin
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-blue-200 text-blue-700 hover:bg-blue-50"
-                    onClick={() => handleDemoLogin("manager")}
-                    disabled={isLoading}
-                  >
-                    <Smartphone className="mr-2 h-4 w-4" />
-                    Manager
-                  </Button>
-                  
-                </div>
 
                 {/* Security Notice */}
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -302,18 +235,6 @@ const LoginPage = () => {
                   </div>
                 </div>
 
-                {/* Support Link */}
-                <div className="text-center">
-                  <p className="text-sm text-gray-600">
-                    Besoin d'aide ?{" "}
-                    <Link 
-                      to="/support" 
-                      className="font-medium text-green-600 hover:text-green-700 hover:underline"
-                    >
-                      Contactez le support
-                    </Link>
-                  </p>
-                </div>
               </CardContent>
             </Card>
 

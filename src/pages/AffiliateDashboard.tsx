@@ -1,100 +1,232 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { useParams, Link } from "react-router-dom";
-import { 
-  Eye, 
-  Edit, 
-  Share2, 
-  QrCode,
-  BarChart3,
-  Users,
-  Calendar,
-  FileText,
-  MapPin,
-  Clock
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
+import { useNavigate } from "react-router-dom";
+import {
+  Eye,
+  Edit,
+  Share2,
+  Plus,
+  Trash2,
+  Globe,
+  Copy,
+  TrendingUp,
+  Rocket
 } from "lucide-react";
 
+interface Site {
+  id: string;
+  name: string;
+  subdomain: string;
+  status: 'draft' | 'published' | 'unpublished';
+  published_at: string | null;
+  created_at: string;
+}
+
 const AffiliateDashboard = () => {
-  const { id } = useParams();
-  const [siteData, setSiteData] = useState({
-    name: "Dr. Jean Dupont",
-    specialty: "Cardiologue",
-    description: "Spécialiste en cardiologie avec 15 ans d'expérience",
-    address: "123 Rue de la Santé, 75013 Paris",
-    phone: "+33 1 23 45 67 89",
-    email: "contact@jeandupont.com",
-    hours: "Lun-Ven: 9h-18h",
-    profilePicture: "", // Ajout
-  });
+  const { profile, affiliate, refreshProfile, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [sites, setSites] = useState<Site[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
 
-  const stats = [
-    { label: "Visites", value: "1,234", icon: Eye },
-    { label: "Demandes", value: "45", icon: Users },
-    { label: "RDV", value: "23", icon: Calendar },
-  ];
+  useEffect(() => {
+    if (affiliate?.is_first_login) {
+      setShowWelcomePopup(true);
+    }
+    fetchSites();
+  }, [affiliate]);
 
-  const generateQRCode = () => {
-    toast.success("QR Code généré!");
+  const fetchSites = async () => {
+    if (!affiliate) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('sites')
+        .select('*')
+        .eq('affiliate_id', affiliate.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setSites(data || []);
+    } catch (error) {
+      console.error('Error fetching sites:', error);
+      toast.error("Erreur lors du chargement des sites");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(`https://${id}.revoobit.com`);
+  const handleStartWizard = async () => {
+    if (affiliate) {
+      await supabase
+        .from('affiliates')
+        .update({ is_first_login: false })
+        .eq('id', affiliate.id);
+
+      await refreshProfile();
+      setShowWelcomePopup(false);
+      navigate('/wizard/step1');
+    }
+  };
+
+  const handleClosewelcome = async () => {
+    if (affiliate) {
+      await supabase
+        .from('affiliates')
+        .update({ is_first_login: false })
+        .eq('id', affiliate.id);
+
+      await refreshProfile();
+      setShowWelcomePopup(false);
+    }
+  };
+
+  const copyLink = (subdomain: string) => {
+    navigator.clipboard.writeText(`https://${subdomain}.revoobit.com`);
     toast.success("Lien copié!");
   };
+
+  const deleteSite = async (id: string) => {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer ce site?")) return;
+
+    try {
+      const { error } = await supabase
+        .from('sites')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast.success("Site supprimé");
+      fetchSites();
+    } catch (error) {
+      console.error('Error deleting site:', error);
+      toast.error("Erreur lors de la suppression");
+    }
+  };
+
+  const stats = [
+    {
+      label: "Sites créés",
+      value: sites.length,
+      icon: Globe
+    },
+    {
+      label: "Sites publiés",
+      value: sites.filter(s => s.status === 'published').length,
+      icon: Eye
+    },
+    {
+      label: "Brouillons",
+      value: sites.filter(s => s.status === 'draft').length,
+      icon: Edit
+    },
+  ];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
-      <div className="pt-24 pb-12">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="mb-8 animate-fade-in">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h1 className="text-4xl font-display font-bold mb-2">
-                  Dashboard <span className="gradient-hero bg-clip-text text-white">Affilié</span>
-                </h1>
-                <p className="text-muted-foreground">Gérez votre mini-site professionnel</p>
+
+      <Dialog open={showWelcomePopup} onOpenChange={setShowWelcomePopup}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+              Bienvenue sur votre espace affilié!
+            </DialogTitle>
+            <DialogDescription className="text-lg pt-4">
+              Félicitations! Votre compte a été créé avec succès.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-6 py-6">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border border-green-200">
+              <div className="flex items-start gap-4">
+                <div className="bg-green-600 p-3 rounded-full">
+                  <Rocket className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg mb-2">Créez votre premier site web!</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Notre assistant vous guidera étape par étape pour créer votre site web professionnel en quelques minutes.
+                    Vous pourrez choisir un template, personnaliser le contenu, et publier votre site instantanément.
+                  </p>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 bg-green-600 rounded-full"></div>
+                      <span>Choix parmi plusieurs templates professionnels</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 bg-green-600 rounded-full"></div>
+                      <span>Personnalisation complète du contenu</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 bg-green-600 rounded-full"></div>
+                      <span>Nom de sous-domaine personnalisé</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 bg-green-600 rounded-full"></div>
+                      <span>Publication instantanée</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <Link to={`/site/${id}`}>
-                <Button variant="glass">
-                  <Eye className="mr-2 h-4 w-4" />
-                  Voir le site
-                </Button>
-              </Link>
             </div>
-            
-            <div className="gradient-glass border border-primary/20 rounded-xl p-4">
-              <p className="text-sm text-muted-foreground mb-2">Votre mini-site</p>
-              <p className="text-lg font-semibold mb-3">
-                https://{id}.revoobit.com
-              </p>
-              <div className="flex gap-2">
-                <Button variant="hero" size="sm" onClick={copyLink}>
-                  <Share2 className="mr-2 h-4 w-4" />
-                  Copier le lien
-                </Button>
-                <Button variant="glass" size="sm" onClick={generateQRCode}>
-                  <QrCode className="mr-2 h-4 w-4" />
-                  Générer QR Code
-                </Button>
-              </div>
+
+            <div className="flex gap-3">
+              <Button
+                onClick={handleStartWizard}
+                className="flex-1 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white"
+                size="lg"
+              >
+                <Plus className="mr-2 h-5 w-5" />
+                Créer mon site maintenant
+              </Button>
+              <Button
+                onClick={handleClosewelcome}
+                variant="outline"
+                size="lg"
+              >
+                Plus tard
+              </Button>
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
 
-          {/* Stats */}
+      <div className="pt-24 pb-12">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 flex justify-between items-center animate-fade-in">
+            <div>
+              <h1 className="text-4xl font-display font-bold mb-2">
+                <span className="gradient-hero bg-clip-text text-transparent">Dashboard Affilié</span>
+              </h1>
+              <p className="text-muted-foreground">
+                Bienvenue, {profile?.full_name || profile?.email}
+              </p>
+            </div>
+            <Button onClick={signOut} variant="outline">
+              Déconnexion
+            </Button>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6 mb-8 animate-fade-in-up">
             {stats.map((stat) => (
-              <Card key={stat.label} className="gradient-glass border-border">
+              <Card key={stat.label} className="gradient-glass border-border hover:border-primary/40 transition-smooth">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
@@ -110,190 +242,97 @@ const AffiliateDashboard = () => {
             ))}
           </div>
 
-          {/* Main Content */}
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Editor */}
-            <div className="lg:col-span-2">
-              <Card className="animate-scale-in">
-                <CardHeader>
-                  <CardTitle>Éditeur de contenu</CardTitle>
-                  <CardDescription>Personnalisez votre mini-site</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Tabs defaultValue="info">
-                    <TabsList className="grid w-full grid-cols-3">
-                      <TabsTrigger value="info">Informations</TabsTrigger>
-                      <TabsTrigger value="content">Contenu</TabsTrigger>
-                      <TabsTrigger value="media">Médias</TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="info" className="space-y-4">
-                      <div>
-                        <Label htmlFor="name">Nom</Label>
-                        <Input 
-                          id="name" 
-                          value={siteData.name}
-                          onChange={(e) => setSiteData({...siteData, name: e.target.value})}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="specialty">Spécialité</Label>
-                        <Input 
-                          id="specialty"
-                          value={siteData.specialty}
-                          onChange={(e) => setSiteData({...siteData, specialty: e.target.value})}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="description">Description</Label>
-                        <Textarea 
-                          id="description"
-                          value={siteData.description}
-                          onChange={(e) => setSiteData({...siteData, description: e.target.value})}
-                          rows={4}
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="phone">Téléphone</Label>
-                          <Input 
-                            id="phone"
-                            value={siteData.phone}
-                            onChange={(e) => setSiteData({...siteData, phone: e.target.value})}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="email">Email</Label>
-                          <Input 
-                            id="email"
-                            value={siteData.email}
-                            onChange={(e) => setSiteData({...siteData, email: e.target.value})}
-                          />
+          <div className="flex gap-4 mb-8">
+            <Button
+              onClick={() => navigate('/wizard/step1')}
+              variant="hero"
+              size="lg"
+            >
+              <Plus className="mr-2 h-5 w-5" />
+              Créer un nouveau site
+            </Button>
+          </div>
+
+          <Card className="animate-scale-in">
+            <CardHeader>
+              <CardTitle>Mes sites web</CardTitle>
+              <CardDescription>Gérez vos sites et leur contenu</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {sites.length === 0 ? (
+                <div className="text-center py-12">
+                  <Globe className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">Aucun site pour le moment</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Créez votre premier site web en quelques clics
+                  </p>
+                  <Button
+                    onClick={() => navigate('/wizard/step1')}
+                    variant="hero"
+                  >
+                    <Plus className="mr-2 h-5 w-5" />
+                    Créer mon premier site
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {sites.map((site) => (
+                    <div
+                      key={site.id}
+                      className="gradient-glass border border-border rounded-xl p-6 hover:border-primary/40 transition-smooth"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-lg mb-2">{site.name}</h3>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {site.subdomain}.revoobit.com
+                          </p>
+                          <Badge variant={site.status === 'published' ? 'default' : 'secondary'}>
+                            {site.status === 'published' ? 'Publié' : site.status === 'draft' ? 'Brouillon' : 'Non publié'}
+                          </Badge>
                         </div>
                       </div>
-                      <Button 
-                        variant="hero" 
-                        className="w-full"
-                        onClick={() => toast.success("Modifications enregistrées!")}
-                      >
-                        Enregistrer
-                      </Button>
-                    </TabsContent>
 
-                    <TabsContent value="content" className="space-y-4">
-                      <div>
-                        <Label htmlFor="address">Adresse</Label>
-                        <Input 
-                          id="address"
-                          value={siteData.address}
-                          onChange={(e) => setSiteData({...siteData, address: e.target.value})}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="hours">Horaires</Label>
-                        <Input 
-                          id="hours"
-                          value={siteData.hours}
-                          onChange={(e) => setSiteData({...siteData, hours: e.target.value})}
-                        />
-                      </div>
-                      <Button 
-                        variant="hero" 
-                        className="w-full"
-                        onClick={() => toast.success("Modifications enregistrées!")}
-                      >
-                        Enregistrer
-                      </Button>
-                    </TabsContent>
-
-                    <TabsContent value="media" className="space-y-4">
-                      <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
-                        <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                        <p className="text-sm text-muted-foreground mb-4">
-                          Glissez-déposez vos images ou cliquez pour parcourir
-                        </p>
-                        <Button variant="glass">
-                          Choisir des fichiers
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => copyLink(site.subdomain)}
+                          className="flex-1"
+                        >
+                          <Copy className="mr-2 h-4 w-4" />
+                          Copier le lien
+                        </Button>
+                        {site.status === 'published' && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => window.open(`https://${site.subdomain}.revoobit.com`, '_blank')}
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        )}
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => navigate(`/wizard/edit/${site.id}`)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => deleteSite(site.id)}
+                        >
+                          <Trash2 className="h-4 w-4 text-destructive" />
                         </Button>
                       </div>
-                      // ...dans TabsContent value="media"...
-                      <div>
-                        <Label htmlFor="profilePicture">Photo de profil</Label>
-                        <Input
-                          id="profilePicture"
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0];
-                            if (file) {
-                              const reader = new FileReader();
-                              reader.onloadend = () => {
-                                setSiteData({ ...siteData, profilePicture: reader.result as string });
-                                toast.success("Photo de profil enregistrée!");
-                              };
-                              reader.readAsDataURL(file);
-                            }
-                          }}
-                        />
-                        {siteData.profilePicture && (
-                          <img
-                            src={siteData.profilePicture}
-                            alt="Photo de profil"
-                            className="w-24 h-24 rounded-full mt-4 object-cover"
-                          />
-                        )}
-                      </div>
-                    </TabsContent>
-                  </Tabs>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="space-y-6">
-              <Card className="animate-fade-in">
-                <CardHeader>
-                  <CardTitle>Actions rapides</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Button variant="glass" className="w-full justify-start">
-                    <BarChart3 className="mr-2 h-4 w-4" />
-                    Voir les statistiques
-                  </Button>
-                  <Button variant="glass" className="w-full justify-start">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Gérer les RDV
-                  </Button>
-                  <Button variant="glass" className="w-full justify-start">
-                    <FileText className="mr-2 h-4 w-4" />
-                    Documents
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="gradient-glass border-primary/20">
-                <CardHeader>
-                  <CardTitle>Informations</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <MapPin className="h-4 w-4 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium mb-1">Adresse</p>
-                      <p className="text-muted-foreground">{siteData.address}</p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium mb-1">Horaires</p>
-                      <p className="text-muted-foreground">{siteData.hours}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

@@ -1,35 +1,50 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import AdminDashboard from "./pages/AdminDashboard";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
 import AffiliateSite from "./pages/AffiliateSite";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
-
-const queryClient = new QueryClient();
+import WizardStep1 from "./pages/wizard/WizardStep1";
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/affiliate/:id" element={<AffiliateDashboard />} />
-          <Route path="/site/:id" element={<AffiliateSite />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <TooltipProvider>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={['affiliate']}>
+              <AffiliateDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/wizard/step1"
+          element={
+            <ProtectedRoute allowedRoles={['affiliate']}>
+              <WizardStep1 />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/site/:id" element={<AffiliateSite />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AuthProvider>
+  </TooltipProvider>
 );
 
 export default App;
