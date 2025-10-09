@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
+import { ProductManagement } from "@/components/ProductManagement";
 import {
   Users,
   Globe,
@@ -318,6 +319,10 @@ const AdminDashboard = () => {
                 </Button>
               </DialogContent>
             </Dialog>
+          </div>
+
+          <div className="mb-8">
+            <ProductManagement />
           </div>
 
           <Card className="animate-scale-in">

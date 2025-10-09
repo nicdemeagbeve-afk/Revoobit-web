@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { useNavigate } from "react-router-dom";
+import { AffiliateProductSelection } from "@/components/AffiliateProductSelection";
 import {
   Eye,
   Edit,
@@ -252,6 +253,12 @@ const AffiliateDashboard = () => {
               Créer un nouveau site
             </Button>
           </div>
+
+          {affiliate && (
+            <div className="mb-8">
+              <AffiliateProductSelection affiliateId={affiliate.id} />
+            </div>
+          )}
 
           <Card className="animate-scale-in">
             <CardHeader>

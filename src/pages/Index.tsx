@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { 
   Heart,
   Star,
@@ -22,6 +22,7 @@ import miiralife from "@/assets/miira-life.png";
 import productPack from "@/assets/Miira-pack.png";
 
 const Index = () => {
+  const navigate = useNavigate();
   const products = [
     {
       id: 1,
@@ -131,8 +132,13 @@ const Index = () => {
                   Acheter maintenant
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-smooth" />
                 </Button>
-                <Button variant="glass" size="xl" className="text-white border-white/20">
-                  Voir les produits
+                <Button
+                  variant="glass"
+                  size="xl"
+                  className="text-white border-white/20"
+                  onClick={() => navigate('/login')}
+                >
+                  Se connecter
                 </Button>
               </div>
             </div>
