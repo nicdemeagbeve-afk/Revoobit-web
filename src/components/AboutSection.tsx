@@ -11,7 +11,7 @@ export function AboutSection() {
     {
       name: "Nicodème AGBEVE",
       role: "Fondateur & Développeur",
-      description: "Visionnaire et architecte technique de Revoobit Togo Digital Hub, il transforme les idées en réalité numérique pour les distributeurs Revoobit.",
+      description: "Visionnaire et architecte technique de Revoobit, Success Family, il transforme les idées en réalité numérique pour les distributeurs Revoobit.",
       // avatar: "team-nicodeme.png", // Supprimé pour utiliser l'icône générique
     },
     {
@@ -23,7 +23,7 @@ export function AboutSection() {
     {
       name: "Communication & Media Manager",
       role: "Un membre clé de notre équipe",
-      description: "Assure la visibilité de Revoobit Togo Digital Hub et la connexion avec notre communauté de distributeurs.",
+      description: "Assure la visibilité de Revoobit, Success Family et la connexion avec notre communauté de distributeurs.",
       // avatar: "team-generic-1.png", // Supprimé pour utiliser l'icône générique
     },
     {
@@ -44,10 +44,10 @@ export function AboutSection() {
     <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-background px-4">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8 text-blue-600">
-          À propos de Revoobit Togo Digital Hub
+          À propos de Revoobit, Success Family
         </h2>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Bienvenue chez Revoobit Togo Digital Hub, la filiale officielle de Revoobit dédiée à accompagner les distributeurs et partenaires du Togo dans leur transformation digitale. Nous agissons en synergie avec revoobit.com pour vous offrir des outils, formations et solutions numériques adaptés aux réalités locales.
+          Bienvenue chez Revoobit, Success Family, la filiale officielle de Revoobit dédiée à accompagner les distributeurs et partenaires du Togo dans leur transformation digitale. Nous agissons en synergie avec revoobit.com pour vous offrir des outils, formations et solutions numériques adaptés aux réalités locales.
         </p>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
@@ -71,7 +71,7 @@ export function AboutSection() {
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-xl">
             <Image
               src={getSupabaseStorageUrl("about-miabesite-hero.png")} // Using Supabase storage URL
-              alt="À propos de Revoobit Togo Digital Hub"
+              alt="À propos de Revoobit, Success Family"
               layout="fill"
               objectFit="cover"
               className="transition-transform duration-500 hover:scale-105"
@@ -83,7 +83,7 @@ export function AboutSection() {
           Notre Engagement
         </h3>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Revoobit Togo Digital Hub s’engage à soutenir le développement professionnel et financier des revendeurs, à promouvoir un usage responsable et éthique du digital, et à contribuer à la notoriété de Revoobit en Afrique de l’Ouest par la qualité, la transparence et l’innovation.
+          Revoobit, Success Family s’engage à soutenir le développement professionnel et financier des revendeurs, à promouvoir un usage responsable et éthique du digital, et à contribuer à la notoriété de Revoobit en Afrique de l’Ouest par la qualité, la transparence et l’innovation.
         </p>
 
         <h3 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-black">
@@ -97,7 +97,7 @@ export function AboutSection() {
           Notre Équipe
         </h3>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Revoobit Togo Digital Hub est fier d'être une équipe locale passionnée par le numérique, dédiée à soutenir la croissance économique de notre région et le succès de chaque distributeur Revoobit.
+          Revoobit, Success Family est fier d'être une équipe locale passionnée par le numérique, dédiée à soutenir la croissance économique de notre région et le succès de chaque distributeur Revoobit.
         </p>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">

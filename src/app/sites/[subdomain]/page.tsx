@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: { subdomain: string
       title: title,
       description: description,
       url: `https://${subdomain}.revoobit-togo.com`, // Replace with your actual domain if applicable
-      siteName: siteData.publicName || "Revoobit Togo Digital Hub",
+      siteName: siteData.publicName || "Revoobit, Success Family",
       images: [
         {
           url: siteData.logoOrPhoto || getSupabaseStorageUrl("miabesite-logo.png"), // Fallback image for OG from Supabase
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: { params: { subdomain: string
       card: 'summary_large_image',
       title: title,
       description: description,
-      creator: '@RevoobitTogoHub', // Replace with your Twitter handle
+      creator: '@RevoobitSuccessFamily', // Replace with your Twitter handle
       images: [siteData.logoOrPhoto || getSupabaseStorageUrl("miabesite-logo.png")], // Fallback image for Twitter from Supabase
     },
     icons: {

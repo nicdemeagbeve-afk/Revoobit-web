@@ -546,95 +546,31 @@ export function ArtisanEcommerceTemplate({ siteData, subdomain }: ArtisanEcommer
       {/* Footer */}
       {sectionsVisibility.showContact && (
         <footer id="contact" className={cn("py-12 text-white px-4", primaryColorDarkBgClass)}> {/* Adjusted padding for mobile */}
-          <div className="container mx-auto"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 md:mb-12"> {/* Adjusted gap and mb for mobile */}
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold mb-4 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:rounded-lg after:bg-blue-500"> {/* Adjusted width for mobile */}
-                  {siteData.publicName} (Distributeur Revoobit)
-                </h3>
-                <p className="text-gray-300 text-sm">Produits Revoobit uniques et services sur mesure pour votre bien-être. Qualité et satisfaction client garanties.</p> {/* Adjusted text size for mobile */}
-                <div className="flex gap-3 mt-4"> {/* Adjusted gap for mobile */}
-                  {siteData.facebookLink && (
-                    <a href={siteData.facebookLink} target="_blank" rel="noopener noreferrer" className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-blue-500 transition-colors"> {/* Adjusted size for mobile */}
-                      <Facebook className="h-5 w-5" /> {/* Adjusted size for mobile */}
-                    </a>
-                  )}
-                  {siteData.instagramLink && (
-                    <a href={siteData.instagramLink} target="_blank" rel="noopener noreferrer" className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-blue-500 transition-colors"> {/* Adjusted size for mobile */}
-                      <Instagram className="h-5 w-5" /> {/* Adjusted size for mobile */}
-                    </a>
-                  )}
-                  {siteData.whatsappNumber && (
-                    <a href={`https://wa.me/${siteData.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-blue-500 transition-colors"> {/* Adjusted size for mobile */}
-                      <MessageSquare className="h-5 w-5" /> {/* Adjusted size for mobile */}
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold mb-4 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:rounded-lg after:bg-blue-500"> {/* Adjusted width for mobile */}
-                  Liens Rapides
-                </h3>
-                <ul className="space-y-2 text-gray-300 text-sm"> {/* Adjusted space-y and text size for mobile */}
-                  {sectionsVisibility.showHero && <li><a href="#accueil" onClick={(e) => handleSmoothScroll(e, '#accueil')} className="hover:text-blue-500 transition-colors">Accueil</a></li>}
-                  {sectionsVisibility.showProductsServices && products.length > 0 && <li><a href="#produits" onClick={(e) => handleSmoothScroll(e, '#produits')} className="hover:text-blue-500 transition-colors">Produits Revoobit</a></li>}
-                  {sectionsVisibility.showProductsServices && services.length > 0 && <li><a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="hover:text-blue-500 transition-colors">Services Revoobit</a></li>}
-                  {sectionsVisibility.showContact && <li><a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="hover:text-blue-500 transition-colors">Contact</a></li>}
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold mb-4 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:rounded-lg after:bg-blue-500"> {/* Adjusted width for mobile */}
-                  Contact
-                </h3>
-                <div className="space-y-3 text-gray-300 text-sm"> {/* Adjusted space-y and text size for mobile */}
-                  <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"> {/* Adjusted size for mobile */}
-                      <MapPin className="h-4 w-4" /> {/* Adjusted size for mobile */}
-                    </div>
-                    <p>{siteData.businessLocation || "Dakar, Sénégal"}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"> {/* Adjusted size for mobile */}
-                      <Phone className="h-4 w-4" /> {/* Adjusted size for mobile */}
-                    </div>
-                    <p>{siteData.secondaryPhoneNumber || siteData.whatsappNumber}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"> {/* Adjusted size for mobile */}
-                      <MessageSquare className="h-4 w-4" /> {/* Adjusted size for mobile */}
-                    </div>
-                    <p>{siteData.whatsappNumber}</p>
-                  </div>
-                  {siteData.email && (
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"> {/* Adjusted size for mobile */}
-                        <Mail className="h-4 w-4" /> {/* Adjusted size for mobile */}
-                      </div>
-                      <p>{siteData.email}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold mb-4 relative pb-2 after:absolute after:bottom-0 after:left-0 after:w-10 after:h-0.5 after:rounded-lg after:bg-blue-500"> {/* Adjusted width for mobile */}
-                  Modes de Paiement
-                </h3>
-                <p className="text-gray-300 text-sm">Nous acceptons les paiements suivants pour vos produits Revoobit :</p> {/* Adjusted text size for mobile */}
-                <div className="flex flex-wrap gap-2 mt-4"> {/* Adjusted gap for mobile */}
-                  {paymentMethods.map((method: string, index: number) => (
-                    <span key={index} className="bg-white text-gray-800 px-2.5 py-1 rounded-md text-xs font-semibold"> {/* Adjusted padding and text size for mobile */}
-                      {method}
-                    </span>
-                  ))}
-                </div>
-              </div>
+          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"> {/* Removed px-4 md:px-6, using container mx-auto */}
+            <div className="text-center sm:text-left">
+              <Link href="/" className="font-bold text-lg"> {/* Adjusted text size for mobile */}
+                {siteData.publicName} (Distributeur Revoobit)
+              </Link>
+              <p className="text-xs text-gray-300 mt-2"> {/* Ensured text-xs for smaller screens */}
+                {siteData.heroSlogan}
+              </p>
             </div>
-
-            <div className="text-center pt-6 border-t border-white/10 opacity-70"> {/* Adjusted padding for mobile */}
-              <p className="text-xs text-gray-400">&copy; {new Date().getFullYear()} {siteData.publicName} (Distributeur Revoobit). Tous droits réservés.</p> {/* Adjusted text size for mobile */}
+            <div className="flex gap-4">
+              {siteData.facebookLink && (
+                <a href={siteData.facebookLink} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                  <Facebook className="h-5 w-5" /> {/* Adjusted size for mobile */}
+                </a>
+              )}
+              {siteData.instagramLink && (
+                <a href={siteData.instagramLink} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                  <Instagram className="h-5 w-5" /> {/* Adjusted size for mobile */}
+                </a>
+              )}
+              {siteData.whatsappNumber && (
+                <a href={`https://wa.me/${siteData.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
+                  <MessageSquare className="h-5 w-5" /> {/* Adjusted size for mobile */}
+                </a>
+              )}
             </div>
           </div>
         </footer>
