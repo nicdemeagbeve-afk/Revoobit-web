@@ -11,36 +11,36 @@ export default function SelectTemplatePage() {
   const templates = [
     {
       id: "default",
-      name: "Site Basique",
-      description: "Un site simple et efficace pour une présence en ligne rapide.",
+      name: "Mini-site Revoobit Basique",
+      description: "Un site simple et efficace pour une présence en ligne rapide et la promotion de vos produits Revoobit.",
       icon: <LayoutTemplate className="h-8 w-8 text-primary" />,
       image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     },
     {
       id: "ecommerce",
-      name: "E-commerce",
-      description: "Idéal pour vendre vos produits en ligne avec un panier et des fiches produits.",
+      name: "Boutique Revoobit (E-commerce)",
+      description: "Idéal pour vendre vos produits Revoobit en ligne avec des fiches produits et un système de commande simplifié.",
       icon: <ShoppingCart className="h-8 w-8 text-primary" />,
       image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     },
     {
       id: "service-portfolio",
-      name: "Service & Portfolio",
-      description: "Mettez en avant vos services et vos réalisations avec une galerie.",
+      name: "Page de Présentation Revoobit",
+      description: "Mettez en avant les produits Revoobit, leurs bienfaits et votre témoignage avec une galerie.",
       icon: <Briefcase className="h-8 w-8 text-primary" />,
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     },
     {
       id: "professional-portfolio",
-      name: "Portfolio Professionnel",
-      description: "Présentez votre expertise et vos projets pour attirer de nouveaux clients.",
+      name: "Page de Capture Leads Revoobit",
+      description: "Présentez votre expertise Revoobit et captez de nouveaux prospects pour développer votre réseau.",
       icon: <Palette className="h-8 w-8 text-primary" />,
       image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80",
     },
     {
       id: "artisan-ecommerce",
-      name: "E-commerce Artisanal",
-      description: "Une boutique en ligne chaleureuse pour vos créations faites à la main.",
+      name: "Mini-site Revoobit Personnalisé",
+      description: "Une boutique en ligne chaleureuse pour vos créations ou une présentation unique de vos produits Revoobit.",
       icon: <Store className="h-8 w-8 text-primary" />,
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     },
@@ -50,10 +50,10 @@ export default function SelectTemplatePage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-muted py-12 px-4">
       <div className="max-w-4xl mx-auto text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4"> {/* Adjusted text size for mobile */}
-          Choisissez votre Template
+          Choisissez le Template de votre Mini-site Revoobit
         </h1>
         <p className="text-base md:text-lg text-muted-foreground"> {/* Adjusted text size for mobile */}
-          Sélectionnez le modèle qui correspond le mieux à votre activité. Vous pourrez le personnaliser par la suite.
+          Sélectionnez le modèle qui correspond le mieux à votre stratégie de promotion Revoobit. Vous pourrez le personnaliser par la suite.
         </p>
       </div>
 

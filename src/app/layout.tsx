@@ -5,8 +5,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider"; // Import ThemeProvider
 
 export const metadata: Metadata = {
-  title: "Miabesite | le site pour tous",
-  description: "Votre site web tout en main, en seulement 15 min, et 10 reponses, pour 0Fcfa",
+  title: "Revoobit Togo Digital Hub | Votre Présence Digitale",
+  description: "La plateforme dédiée aux distributeurs Revoobit au Togo : créez et gérez votre site web professionnel pour promouvoir les produits Revoobit et développer votre réseau.",
 };
 
 export default function RootLayout({

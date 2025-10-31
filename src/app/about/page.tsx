@@ -5,8 +5,8 @@ import { Footer } from "@/components/landing/Footer";
 import { AboutSection } from "@/components/AboutSection"; // Import the moved AboutSection
 
 export const metadata: Metadata = {
-  title: "À propos de nous",
-  description: "Découvrez l'histoire, la mission, la vision et l'équipe de Miabesite.",
+  title: "À propos de Revoobit Togo Digital Hub",
+  description: "Découvrez la mission, la vision et l'équipe de Revoobit Togo Digital Hub, votre partenaire digital.",
 };
 
 export default function AboutPage() {

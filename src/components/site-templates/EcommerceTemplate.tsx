@@ -72,7 +72,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
 
   const handleAddToCart = (productTitle: string) => {
     setCartCount(prev => prev + 1);
-    toast.success(`"${productTitle}" a été ajouté à votre panier !`);
+    toast.success(`"${productTitle}" a été ajouté à votre panier Revoobit !`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -121,9 +121,9 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
   const testimonialsToDisplay = siteData.testimonials && siteData.testimonials.length > 0
     ? siteData.testimonials
     : [
-        { quote: "J'ai acheté plusieurs articles et la qualité est toujours au rendez-vous. Livraison rapide et service client impeccable !", author: "Fatou Diallo", location: siteData.businessLocation || "Dakar", avatar: "https://randomuser.me/api/portraits/women/32.jpg" },
-        { quote: "Ma boutique préférée pour les produits artisanaux. Chaque pièce est unique et faite avec passion. Je recommande vivement !", author: "Moussa Traoré", location: siteData.businessLocation || "Abidjan", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
-        { quote: "Des créations magnifiques et un excellent rapport qualité-prix. J'adore mes nouveaux bijoux !", author: "Aïcha Koné", location: siteData.businessLocation || "Lomé", avatar: "https://randomuser.me/api/portraits/women/67.jpg" },
+        { quote: "J'ai acheté plusieurs articles Revoobit et la qualité est toujours au rendez-vous. Livraison rapide et service client impeccable !", author: "Fatou Diallo", location: siteData.businessLocation || "Dakar", avatar: "https://randomuser.me/api/portraits/women/32.jpg" },
+        { quote: "Ma boutique préférée pour les produits Revoobit. Chaque pièce est unique et faite avec passion. Je recommande vivement !", author: "Moussa Traoré", location: siteData.businessLocation || "Abidjan", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
+        { quote: "Des créations magnifiques et un excellent rapport qualité-prix. J'adore mes nouveaux produits Revoobit !", author: "Aïcha Koné", location: siteData.businessLocation || "Lomé", avatar: "https://randomuser.me/api/portraits/women/67.jpg" },
       ];
 
   const skillsToDisplay = siteData.skills || [];
@@ -152,16 +152,16 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
               )}
               <div className="flex flex-col">
                 <h1 className={cn("text-lg font-bold", primaryColorTextClass)}>{siteData.publicName}</h1> {/* Adjusted text size for mobile */}
-                <p className="text-xs text-gray-600">Boutique en ligne</p> {/* Adjusted text size for mobile */}
+                <p className="text-xs text-gray-600">Boutique Revoobit en ligne</p> {/* Adjusted text size for mobile */}
               </div>
             </div>
             <div className="hidden md:flex items-center gap-6">
-              {sectionsVisibility.showProductsServices && products.length > 0 && <a href="#products" onClick={(e) => handleSmoothScroll(e, '#products')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Produits</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && services.length > 0 && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Services</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && products.length > 0 && <a href="#products" onClick={(e) => handleSmoothScroll(e, '#products')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Produits Revoobit</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && services.length > 0 && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Services Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showAbout && <a href="#about" onClick={(e) => handleSmoothScroll(e, '#about')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">À propos</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Compétences</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Mon Expertise Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
-                <a href="#testimonials" onClick={(e) => handleSmoothScroll(e, '#testimonials')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Témoignages</a>
+                <a href="#testimonials" onClick={(e) => handleSmoothScroll(e, '#testimonials')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Témoignages Clients Revoobit</a>
               )}
               {sectionsVisibility.showContact && <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Contact</a>} {/* Adjusted text size for mobile */}
               <div className="relative">
@@ -182,12 +182,12 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 z-40">
             <nav className="flex flex-col items-center gap-4">
-              {sectionsVisibility.showProductsServices && products.length > 0 && <a href="#products" onClick={(e) => handleSmoothScroll(e, '#products')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Produits</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && services.length > 0 && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Services</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && products.length > 0 && <a href="#products" onClick={(e) => handleSmoothScroll(e, '#products')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Produits Revoobit</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && services.length > 0 && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Services Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showAbout && <a href="#about" onClick={(e) => handleSmoothScroll(e, '#about')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">À propos</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Compétences</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Mon Expertise Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
-                <a href="#testimonials" onClick={(e) => handleSmoothScroll(e, '#testimonials')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Témoignages</a>
+                <a href="#testimonials" onClick={(e) => handleSmoothScroll(e, '#testimonials')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Témoignages Clients Revoobit</a>
               )}
               {sectionsVisibility.showContact && <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Contact</a>} {/* Adjusted text size for mobile */}
               <div className="relative mt-4">
@@ -210,20 +210,20 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
             {siteData.logoOrPhoto && (
               <Image
                 src={siteData.logoOrPhoto}
-                alt={`${siteData.publicName} Logo`}
+                alt={`${siteData.publicName} Logo Revoobit`}
                 width={siteData.heroBackgroundImage ? 60 : 100} // Smaller if background image, larger if not
                 height={siteData.heroBackgroundImage ? 60 : 100}
                 className={cn("rounded-full object-cover mb-4", siteData.heroBackgroundImage ? "mx-auto" : "mx-auto")}
               />
             )}
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{siteData.heroSlogan}</h2> {/* Adjusted text size for mobile */}
-            <p className="text-base md:text-xl mb-8 opacity-90">{siteData.aboutStory}</p> {/* Adjusted text size for mobile */}
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{siteData.heroSlogan || "Découvrez les bienfaits des produits Revoobit !"}</h2> {/* Adjusted text size for mobile */}
+            <p className="text-base md:text-xl mb-8 opacity-90">{siteData.aboutStory || "Votre distributeur officiel Revoobit au Togo, engagé pour votre bien-être."}</p> {/* Adjusted text size for mobile */}
             <Link
               href="#products"
               onClick={(e) => handleSmoothScroll(e, '#products')}
               className={cn("inline-flex items-center gap-2 px-5 py-2 rounded-lg font-bold text-base bg-white text-blue-600 hover:bg-gray-100 transition-all duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg w-full sm:w-auto", primaryColorTextClass)}
             >
-              <ShoppingCart className="h-5 w-5" /> Acheter maintenant
+              <ShoppingCart className="h-5 w-5" /> Acheter les produits Revoobit
             </Link>
           </div>
         </section>
@@ -233,7 +233,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
       {sectionsVisibility.showProductsServices && products.length > 0 && (
         <section id="products" className="py-12 bg-gray-100 px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Nos Produits</h2> {/* Adjusted text size and mb for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Nos Produits Revoobit</h2> {/* Adjusted text size and mb for mobile */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> {/* Adjusted gap and grid for mobile */}
               {products.map((product, index) => (
                 <div key={index} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-2">
@@ -272,7 +272,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
       {sectionsVisibility.showProductsServices && services.length > 0 && (
         <section id="services" className="py-12 bg-white px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Nos Services</h2> {/* Adjusted text size and mb for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Nos Services Revoobit</h2> {/* Adjusted text size and mb for mobile */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> {/* Adjusted gap and grid for mobile */}
               {services.map((service, index) => (
                 <div key={index} className="bg-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-2">
@@ -294,7 +294,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
                       </p>
                     )}
                     <Link
-                      href={`https://wa.me/${siteData.whatsappNumber}?text=Je%20suis%20intéressé%20par%20le%20service%20${service.title}`}
+                      href={`https://wa.me/${siteData.whatsappNumber}?text=Je%20suis%20intéressé%20par%20le%20service%20${service.title}%20Revoobit`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn("w-full px-4 py-2 rounded-lg font-bold text-white text-sm transition-colors duration-300 bg-[#25D366] hover:bg-[#128C7E]")}
@@ -312,7 +312,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
       {sectionsVisibility.showAbout && (
         <section id="about" className="py-12 bg-white px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-5xl text-center"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold mb-8", primaryColorTextClass)}>À propos de nous</h2> {/* Adjusted text size for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold mb-8", primaryColorTextClass)}>À propos de votre distributeur Revoobit</h2> {/* Adjusted text size for mobile */}
             <p className="text-base text-gray-700 max-w-3xl mx-auto leading-relaxed"> {/* Adjusted text size for mobile */}
               {siteData.aboutStory}
             </p>
@@ -323,7 +323,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
       {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && (
         <section id="skills" className="py-12 bg-gray-100 px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Nos Compétences</h2> {/* Adjusted text size and mb for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Mon Expertise Revoobit</h2> {/* Adjusted text size and mb for mobile */}
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"> {/* Adjusted gap and grid for mobile */}
               {skillsToDisplay.map((skill, index) => {
                 const IconComponent = getLucideIcon(skill.icon || "Wrench"); // Default icon
@@ -343,7 +343,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
       {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
         <section id="testimonials" className="py-12 bg-gray-100 px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Ce que nos clients disent</h2> {/* Adjusted text size and mb for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Ce que nos clients Revoobit disent</h2> {/* Adjusted text size and mb for mobile */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6"> {/* Adjusted gap and grid for mobile */}
               {testimonialsToDisplay.map((testimonial, index) => (
                 <div key={index} className="bg-white rounded-lg p-6 shadow-lg relative"> {/* Adjusted padding for mobile */}
@@ -372,7 +372,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
       {sectionsVisibility.showContact && (
         <section id="contact" className="py-12 bg-gray-100 px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-3xl text-center"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Contactez-nous</h2> {/* Adjusted text size and mb for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Contactez votre distributeur Revoobit</h2> {/* Adjusted text size and mb for mobile */}
             {siteData.showContactForm ? (
               <div className="bg-white p-6 rounded-lg shadow-md"> {/* Adjusted padding for mobile */}
                 <form onSubmit={handleSubmit} className="space-y-4"> {/* Adjusted space-y for mobile */}
@@ -390,9 +390,9 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
                   </div>
                   {siteData.productsAndServices.filter(item => item.actionButton !== 'buy').length > 0 && (
                     <div>
-                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Service intéressé</label> {/* Adjusted text size for mobile */}
+                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Produit Revoobit intéressé</label> {/* Adjusted text size for mobile */}
                       <select id="service" name="service" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" value={formData.service} onChange={handleChange}> {/* Adjusted padding and text size for mobile */}
-                        <option value="">Sélectionnez un service</option>
+                        <option value="">Sélectionnez un produit Revoobit</option>
                         {siteData.productsAndServices.filter(item => item.actionButton !== 'buy').map((service: any, idx: number) => (
                           <option key={idx} value={service.title}>{service.title}</option>
                         ))}
@@ -444,7 +444,7 @@ export function EcommerceTemplate({ siteData, subdomain }: EcommerceTemplateProp
 
       <footer className={cn("py-6 text-white px-4", primaryColorDarkBgClass)}> {/* Adjusted padding for mobile */}
         <p className="text-xs text-gray-400"> {/* Ensured text-xs for smaller screens */}
-          © {new Date().getFullYear()} {siteData.publicName}. Tous droits réservés.
+          © {new Date().getFullYear()} {siteData.publicName} (Distributeur Revoobit). Tous droits réservés.
         </p>
       </footer>
     </div>

@@ -99,13 +99,13 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
           }}
         >
           {siteData.logoOrPhoto && (
-            <Image src={siteData.logoOrPhoto} alt={`${siteData.publicName} Logo`} width={80} height={80} className={cn("rounded-full object-cover mb-4", siteData.heroBackgroundImage ? "mx-auto" : "mx-auto")} />
+            <Image src={siteData.logoOrPhoto} alt={`${siteData.publicName} Logo Revoobit`} width={80} height={80} className={cn("rounded-full object-cover mb-4", siteData.heroBackgroundImage ? "mx-auto" : "mx-auto")} />
           )}
           <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            Bienvenue sur {siteData.publicName}!
+            Bienvenue chez {siteData.publicName}, votre distributeur Revoobit !
           </h1>
           <p className="text-base md:text-xl mb-8 max-w-prose">
-            {siteData.heroSlogan || "Votre site est en ligne."}
+            {siteData.heroSlogan || "Votre partenaire pour une vie saine avec Revoobit."}
           </p>
           <Link
             href={`https://wa.me/${siteData.whatsappNumber}`}
@@ -113,7 +113,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
             rel="noopener noreferrer"
             className={cn("inline-flex items-center gap-2 px-5 py-2 rounded-lg font-bold text-base text-white transition-all duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg bg-[#25D366] hover:bg-[#128C7E] w-full sm:w-auto")}
           >
-            <MessageSquare className="h-5 w-5" /> Contactez-nous sur WhatsApp
+            <MessageSquare className="h-5 w-5" /> Commandez vos produits Revoobit sur WhatsApp
           </Link>
         </section>
       )}
@@ -121,7 +121,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
       {sectionsVisibility.showAbout && siteData.aboutStory && (
         <section className="py-12 md:py-24 w-full bg-white text-center px-4">
           <div className="container mx-auto max-w-3xl">
-            <h2 className={cn("text-2xl md:text-3xl font-bold mb-6", primaryColorTextClass)}>À Propos de Nous</h2>
+            <h2 className={cn("text-2xl md:text-3xl font-bold mb-6", primaryColorTextClass)}>À Propos de {siteData.publicName} (Distributeur Revoobit)</h2>
             <p className="text-base text-gray-700 leading-relaxed">
               {siteData.aboutStory}
             </p>
@@ -132,7 +132,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
       {sectionsVisibility.showProductsServices && productsAndServicesToDisplay.length > 0 && (
         <section className="py-12 md:py-24 w-full bg-gray-50 text-center px-4">
           <div className="container mx-auto max-w-5xl">
-            <h2 className={cn("text-2xl md:text-3xl font-bold mb-12", primaryColorTextClass)}>Nos Offres</h2>
+            <h2 className={cn("text-2xl md:text-3xl font-bold mb-12", primaryColorTextClass)}>Nos Produits Revoobit</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {productsAndServicesToDisplay.map((product, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-md p-4 space-y-3">
@@ -147,7 +147,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
                     </p>
                   )}
                   <Link
-                    href={`https://wa.me/${siteData.whatsappNumber}?text=Je%20suis%20intéressé%20par%20${product.title}`}
+                    href={`https://wa.me/${siteData.whatsappNumber}?text=Je%20suis%20intéressé%20par%20${product.title}%20Revoobit`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn("inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold text-sm text-white transition-colors duration-300 bg-[#25D366] hover:bg-[#128C7E] w-full")}
@@ -164,7 +164,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
       {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
         <section className="py-12 md:py-24 w-full bg-white text-center px-4">
           <div className="container mx-auto max-w-4xl">
-            <h2 className={cn("text-2xl md:text-3xl font-bold mb-12", primaryColorTextClass)}>Ce que nos clients disent</h2>
+            <h2 className={cn("text-2xl md:text-3xl font-bold mb-12", primaryColorTextClass)}>Témoignages de nos clients Revoobit</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {testimonialsToDisplay.map((testimonial, index) => (
                 <div key={index} className="bg-gray-50 rounded-lg shadow-sm p-4 text-left">
@@ -189,7 +189,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
       {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && (
         <section className="py-12 md:py-24 w-full bg-gray-50 text-center px-4">
           <div className="container mx-auto max-w-5xl">
-            <h2 className={cn("text-2xl md:text-3xl font-bold mb-12", primaryColorTextClass)}>Nos Compétences</h2>
+            <h2 className={cn("text-2xl md:text-3xl font-bold mb-12", primaryColorTextClass)}>Mon Expertise Revoobit</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {skillsToDisplay.map((skill, index) => {
                 const IconComponent = skill.icon ? getLucideIcon(skill.icon) : Wrench;
@@ -209,7 +209,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
       {sectionsVisibility.showContact && (
         <section className="py-12 md:py-24 w-full bg-white text-center px-4">
           <div className="container mx-auto max-w-3xl">
-            <h2 className={cn("text-2xl md:text-3xl font-bold mb-8", primaryColorTextClass)}>Contactez-nous</h2>
+            <h2 className={cn("text-2xl md:text-3xl font-bold mb-8", primaryColorTextClass)}>Contactez votre distributeur Revoobit</h2>
             {siteData.showContactForm ? (
               <div className="bg-gray-100 p-6 rounded-lg shadow-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -227,9 +227,9 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
                   </div>
                   {productsAndServicesToDisplay.length > 0 && (
                     <div>
-                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Service intéressé</label>
+                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Produit Revoobit intéressé</label>
                       <select id="service" name="service" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" value={formData.service} onChange={handleChange}>
-                        <option value="">Sélectionnez un service</option>
+                        <option value="">Sélectionnez un produit Revoobit</option>
                         {productsAndServicesToDisplay.map((product: any, idx: number) => (
                           <option key={idx} value={product.title}>{product.title}</option>
                         ))}
@@ -275,7 +275,7 @@ export function DefaultTemplate({ siteData, subdomain }: DefaultTemplateProps) {
 
       <footer className="w-full py-6 bg-gray-800 text-white text-center mt-auto px-4">
         <p className="text-xs text-gray-400">
-          © {new Date().getFullYear()} {siteData.publicName}. Tous droits réservés.
+          © {new Date().getFullYear()} {siteData.publicName} (Distributeur Revoobit). Tous droits réservés.
         </p>
       </footer>
     </div>

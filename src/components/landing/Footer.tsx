@@ -13,7 +13,7 @@ export function Footer() {
           <Image src={getSupabaseStorageUrl("miabesite-logo.png")} alt="Miabesite Logo" width={24} height={24} className="h-6 w-6" />
           <Link href="/" className="font-bold text-xl">Miabesite</Link>
           <p className="text-sm text-muted-foreground mt-2 sm:mt-0 sm:ml-4">
-            Création automatique de sites web pour tous.
+            La plateforme de création de mini-sites pour les distributeurs Revoobit au Togo.
           </p>
         </div>
         <nav className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6 text-sm">

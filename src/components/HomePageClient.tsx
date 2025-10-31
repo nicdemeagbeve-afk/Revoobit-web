@@ -18,7 +18,9 @@ export default function HomePageClient() {
 
   React.useEffect(() => {
     const message = searchParams.get('message');
-    if (message === 'unauthorized') {
+    if (message === 'unauthorized-revoobit') {
+      toast.error("Accès non autorisé. Veuillez vous connecter ou créer un compte pour gérer votre mini-site Revoobit.");
+    } else if (message === 'unauthorized') {
       toast.error("Accès non autorisé. Veuillez vous connecter ou créer un compte pour accéder à ce site.");
     }
   }, [searchParams]);

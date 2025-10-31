@@ -368,13 +368,13 @@ export function SiteCreationWizard({ initialSiteData }: SiteCreationWizardProps)
       }
 
       if (userSites && userSites.length >= 5) {
-        toast.error("Vous avez atteint la limite de 5 sites web par compte.");
+        toast.error("Vous avez atteint la limite de 5 mini-sites Revoobit par compte.");
         return;
       }
 
       const hasSameTemplate = userSites?.some(site => site.template_type === data.templateType);
       if (hasSameTemplate) {
-        toast.error(`Vous avez déjà un site avec le template "${data.templateType}". Veuillez choisir un template différent.`);
+        toast.error(`Vous avez déjà un mini-site Revoobit avec le template "${data.templateType}". Veuillez choisir un template différent pour diversifier votre approche.`);
         return;
       }
     }
@@ -504,10 +504,10 @@ export function SiteCreationWizard({ initialSiteData }: SiteCreationWizardProps)
           .eq('user_id', user.id); // Corrected to user_id
 
         if (updateError) {
-          toast.error(`Erreur lors de la mise à jour du site: ${updateError.message}`);
+          toast.error(`Erreur lors de la mise à jour du mini-site Revoobit: ${updateError.message}`);
           return;
         }
-        toast.success("Votre site a été mis à jour avec succès ! Vous serez redirigé sous peu.");
+        toast.success("Votre mini-site Revoobit a été mis à jour avec succès ! Vous serez redirigé sous peu.");
       } else {
         // Insert new site
         const { error: insertError } = await supabase
@@ -525,18 +525,18 @@ export function SiteCreationWizard({ initialSiteData }: SiteCreationWizardProps)
           if (insertError.code === '23505') { // PostgreSQL unique violation error code
             toast.error(`L'identifiant "${siteIdentifier}" est déjà pris. Veuillez réessayer.`);
           } else {
-            toast.error(`Erreur lors de la création du site: ${insertError.message}`);
+            toast.error(`Erreur lors de la création du mini-site Revoobit: ${insertError.message}`);
           }
           return;
         }
-        toast.success("Votre site est en cours de création ! Vous serez redirigé sous peu.");
+        toast.success("Votre mini-site Revoobit est en cours de création ! Vous serez redirigé sous peu.");
       }
 
       router.push(`/sites/${siteIdentifier}`); // Redirect to the new site's public page
       router.refresh(); // Refresh to update data
     } catch (error: any) {
       console.error("Site creation/update error:", error);
-      toast.error(`Une erreur est survenue: ${error.message || "Impossible de créer/mettre à jour le site."}`);
+      toast.error(`Une erreur est survenue: ${error.message || "Impossible de créer/mettre à jour le mini-site Revoobit."}`);
     }
   };
 

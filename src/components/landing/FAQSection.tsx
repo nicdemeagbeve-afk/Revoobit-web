@@ -11,29 +11,29 @@ import {
 export function FAQSection() {
   const faqs = [
     {
-      question: "Est-ce vraiment automatique ?",
+      question: "Comment cette plateforme m'aide-t-elle en tant que distributeur Revoobit ?",
       answer:
-        "Oui, notre système basé sur l'IA génère votre site web complet en quelques minutes après que vous ayez rempli un court formulaire. Vous n'avez aucune compétence technique à avoir.",
+        "Revoobit Togo Digital Hub vous permet de créer un mini-site professionnel en quelques minutes pour présenter les produits Revoobit (Miira-Cell+, Miiralife, etc.), partager votre lien de parrainage et capter de nouveaux prospects en ligne, sans aucune compétence technique.",
     },
     {
-      question: "Puis-je avoir un nom de domaine personnalisé ?",
+      question: "Mon mini-site sera-t-il lié à Revoobit.com ?",
       answer:
-        "Oui, vous obtenez un sous-domaine personnalisé (ex: tonnom.ctcsite.com). Si vous souhaitez un nom de domaine entièrement personnalisé (ex: monentreprise.com), nous pouvons vous guider sur les étapes à suivre pour le connecter.",
+        "Oui, votre mini-site aura un sous-domaine personnalisé (ex: tonnom.revoobit-togo.com) et sera conçu pour s'intégrer harmonieusement avec l'écosystème Revoobit, tout en respectant la charte graphique de la marque.",
     },
     {
-      question: "Puis-je modifier mon site après ?",
+      question: "Puis-je vendre les produits Revoobit directement depuis mon site ?",
       answer:
-        "Absolument ! Une fois votre site créé, vous avez accès à un éditeur simple et intuitif qui vous permet de modifier les textes, les images, les couleurs et la structure de votre site à tout moment, sans risque de tout casser.",
+        "Absolument ! Votre mini-site peut inclure des fiches produits pour Miira-Cell+ et autres, avec des boutons d'action pour diriger vos clients vers WhatsApp, un formulaire de commande ou votre lien de parrainage Revoobit. Vous gérez vos commandes et contacts directement.",
     },
     {
-      question: "Comment démarrer gratuitement ?",
+      question: "Y a-t-il des formations ou un support spécifique pour les distributeurs Revoobit ?",
       answer:
-        "Le démarrage est gratuit pour un début. Des options payantes sont disponibles pour des fonctionnalités avancées, et le paiement se fait via des méthodes de paiement mobile locales sécurisées (Orange Money, Moov Money, etc.) ou par carte bancaire, directement sur notre plateforme.",
+        "Oui, nous proposons des ateliers pratiques sur le marketing numérique, la vente en ligne et la gestion de la relation client, spécifiquement adaptés aux distributeurs Revoobit. Notre support est disponible 24h/7 via WhatsApp pour vous accompagner.",
     },
     {
-      question: "Que se passe-t-il si j’ai besoin d’aide ?",
+      question: "Comment démarrer gratuitement avec Revoobit Togo Digital Hub ?",
       answer:
-        "Notre équipe de support est disponible 24h/7 via WhatsApp pour répondre à toutes vos questions et vous assister en cas de besoin. Votre satisfaction est notre priorité.",
+        "Le démarrage est gratuit pour créer votre premier mini-site Revoobit. Des options payantes sont disponibles pour des fonctionnalités avancées, et le paiement se fait via des méthodes de paiement mobile locales sécurisées (Orange Money, Moov Money, etc.) ou par carte bancaire.",
     },
   ];
 
@@ -41,7 +41,7 @@ export function FAQSection() {
     <section className="w-full py-12 md:py-24 lg:py-32 bg-muted px-4"> {/* Added px-4 */}
       <div className="container mx-auto text-center"> {/* Removed px-4 md:px-6, using container mx-auto */}
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12">
-          Questions fréquentes
+          Questions fréquentes sur Revoobit Togo Digital Hub
         </h2>
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full">

@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: { params: { subdomain: string
 
   const siteData: SiteEditorFormData = site.site_data as SiteEditorFormData;
 
-  const title = siteData.publicName ? `${siteData.publicName} | ${siteData.heroSlogan || "Votre site professionnel"}` : `Site ${subdomain}`;
-  const description = siteData.aboutStory || `Découvrez le site de ${siteData.publicName || subdomain}.`;
+  const title = siteData.publicName ? `${siteData.publicName} | ${siteData.heroSlogan || "Votre distributeur Revoobit"}` : `Mini-site Revoobit ${subdomain}`;
+  const description = siteData.aboutStory || `Découvrez le mini-site Revoobit de ${siteData.publicName || subdomain}.`;
   const siteLogoUrl = siteData.logoOrPhoto || getSupabaseStorageUrl("favicon.ico"); // Use site logo or fallback to SaaS favicon from Supabase
 
   return {
@@ -50,14 +50,14 @@ export async function generateMetadata({ params }: { params: { subdomain: string
     openGraph: {
       title: title,
       description: description,
-      url: `https://${subdomain}.ctcsite.com`, // Replace with your actual domain if applicable
-      siteName: siteData.publicName || "Miabesite",
+      url: `https://${subdomain}.revoobit-togo.com`, // Replace with your actual domain if applicable
+      siteName: siteData.publicName || "Revoobit Togo Digital Hub",
       images: [
         {
           url: siteData.logoOrPhoto || getSupabaseStorageUrl("miabesite-logo.png"), // Fallback image for OG from Supabase
           width: 800,
           height: 600,
-          alt: siteData.publicName || "Logo du site",
+          alt: siteData.publicName || "Logo du site Revoobit",
         },
       ],
       locale: 'fr_FR',
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: { params: { subdomain: string
       card: 'summary_large_image',
       title: title,
       description: description,
-      creator: '@Miabesite', // Replace with your Twitter handle
+      creator: '@RevoobitTogoHub', // Replace with your Twitter handle
       images: [siteData.logoOrPhoto || getSupabaseStorageUrl("miabesite-logo.png")], // Fallback image for Twitter from Supabase
     },
     icons: {
@@ -98,7 +98,7 @@ export default async function DynamicSitePage({ params }: { params: { subdomain:
   // If the site has a user_id and the current user is not the owner,
   // redirect to landing page with an unauthorized message.
   if (site.user_id && (!user || user.id !== site.user_id)) {
-    redirect('/?message=unauthorized');
+    redirect('/?message=unauthorized-revoobit');
   }
 
   const siteData: SiteEditorFormData = site.site_data as SiteEditorFormData; // Cast to the new comprehensive type

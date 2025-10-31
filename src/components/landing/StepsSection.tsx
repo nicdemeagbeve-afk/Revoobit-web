@@ -8,18 +8,18 @@ export function StepsSection() {
   const steps = [
     {
       icon: <ClipboardList className="h-8 w-8 text-primary" />,
-      title: "1. Tu remplis un court formulaire",
-      description: "Nom, activité, couleurs — et c’est tout !",
+      title: "1. Tu renseignes tes informations Revoobit",
+      description: "Nom, produits phares, témoignages — et c’est tout !",
     },
     {
       icon: <Bot className="h-8 w-8 text-primary" />,
-      title: "2. Notre IA crée ton site automatiquement",
-      description: "Design, structure, textes et images adaptés à ton activité.",
+      title: "2. Notre IA génère ton mini-site Revoobit",
+      description: "Design, structure, textes et images optimisés pour la promotion des produits Revoobit.",
     },
     {
       icon: <Globe className="h-8 w-8 text-primary" />,
-      title: "3. Ton site est en ligne en moins de 5 minutes",
-      description: "Avec ton propre sous-domaine (ex: tonnom.ctcsite.com) Et si tu veux, tu peux le modifier toi-même quand tu veux — sans rien casser.",
+      title: "3. Ton site Revoobit est en ligne en moins de 5 minutes",
+      description: "Avec ton propre sous-domaine (ex: tonnom.revoobit-togo.com). Modifie-le à tout moment sans effort.",
     },
   ];
 
@@ -27,7 +27,7 @@ export function StepsSection() {
     <section className="w-full py-12 md:py-24 lg:py-32 bg-background px-4"> {/* Added px-4 */}
       <div className="container mx-auto text-center"> {/* Removed px-4 md:px-6, using container mx-auto */}
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12">
-          En 3 étapes simples
+          En 3 étapes simples pour ton business Revoobit
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"> {/* Added max-w-5xl mx-auto for better centering on larger screens */}
           {steps.map((step, index) => (

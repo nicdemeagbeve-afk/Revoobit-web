@@ -148,18 +148,18 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
         actionButton: p.actionButton,
       }))
     : [
-        { image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', title: "Rénovation Salle de Bain", description: "Transformation complète avec douche à l'italienne.", price: 150000, currency: "XOF", actionButton: "quote" },
-        { image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', title: "Cuisine Équipée", description: "Aménagement complet avec îlot central.", price: 250000, currency: "XOF", actionButton: "quote" },
-        { image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1558&q=80', title: "Rénovation Salon", description: "Transformation complète avec parquet et éclairage.", price: 100000, currency: "XOF", actionButton: "quote" },
-        { image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', title: "Aménagement Terrasse", description: "Création d'un espace extérieur fonctionnel.", price: 80000, currency: "XOF", actionButton: "quote" },
+        { image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', title: "Présentation Miira-Cell+", description: "Découvrez les avantages uniques de Miira-Cell+ pour votre santé.", price: 0, currency: "XOF", actionButton: "quote" },
+        { image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', title: "Opportunité d'Affaire Revoobit", description: "Rejoignez mon équipe et construisez votre indépendance financière.", price: 0, currency: "XOF", actionButton: "quote" },
+        { image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1558&q=80', title: "Témoignages Clients Revoobit", description: "Des histoires de succès et de bien-être grâce aux produits Revoobit.", price: 0, currency: "XOF", actionButton: "quote" },
+        { image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', title: "Formation Distributeur Revoobit", description: "Accompagnement personnalisé pour votre développement.", price: 0, currency: "XOF", actionButton: "quote" },
       ];
 
   const testimonialsToDisplay = siteData.testimonials && siteData.testimonials.length > 0
     ? siteData.testimonials
     : [
-        { quote: "J'ai fait appel à Artisan Pro pour la rénovation complète de ma salle de bain. Le travail a été réalisé dans les délais et le budget convenus. Je recommande vivement ses services !", author: "Marie Diop", location: siteData.businessLocation || "Dakar", avatar: "https://randomuser.me/api/portraits/women/32.jpg" },
-        { quote: "Excellent travail pour l'aménagement de ma cuisine. L'artisan a su comprendre mes besoins et proposer des solutions adaptées. Professionnalisme et qualité du travail.", author: "Jean Ndiaye", location: siteData.businessLocation || "Pikine", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
-        { quote: "Intervention rapide et efficace pour réparer une fuite d'eau. Prix raisonnable et travail soigné. Je ne vais plus chercher ailleurs pour mes travaux de réparation.", author: "Fatou Sarr", location: siteData.businessLocation || "Guédiawaye", avatar: "https://randomuser.me/api/portraits/women/67.jpg" },
+        { quote: "J'ai fait appel à ce distributeur Revoobit pour des conseils sur Miira-Cell+. Le service a été excellent et les résultats sont là. Je recommande vivement !", author: "Marie Diop", location: siteData.businessLocation || "Dakar", avatar: "https://randomuser.me/api/portraits/women/32.jpg" },
+        { quote: "Excellent accompagnement pour démarrer mon activité Revoobit. Le distributeur a su comprendre mes besoins et proposer des solutions adaptées. Professionnalisme et qualité du travail.", author: "Jean Ndiaye", location: siteData.businessLocation || "Pikine", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
+        { quote: "Intervention rapide et efficace pour toutes mes questions sur les produits Revoobit. Prix raisonnable et travail soigné. Je ne vais plus chercher ailleurs pour mes besoins Revoobit.", author: "Fatou Sarr", location: siteData.businessLocation || "Guédiawaye", avatar: "https://randomuser.me/api/portraits/women/67.jpg" },
       ];
 
   const skillsToDisplay = siteData.skills || [];
@@ -193,18 +193,18 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
               )}
               <div className="flex flex-col">
                 <h1 className={cn("text-lg font-bold", primaryColorTextClass)}>{siteData.publicName}</h1> {/* Adjusted text size for mobile */}
-                <p className="text-xs text-gray-600">Expert en Rénovation</p> {/* Adjusted text size for mobile */}
+                <p className="text-xs text-gray-600">Distributeur Revoobit Officiel</p> {/* Adjusted text size for mobile */}
               </div>
             </div>
             <div className={cn("hidden md:flex items-center gap-6")}> {/* Adjusted gap for mobile */}
               {sectionsVisibility.showHero && <a href="#accueil" onClick={(e) => handleSmoothScroll(e, '#accueil')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Accueil</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showAbout && <a href="#apropos" onClick={(e) => handleSmoothScroll(e, '#apropos')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">À propos</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Services</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && <a href="#portfolio" onClick={(e) => handleSmoothScroll(e, '#portfolio')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Portfolio</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Produits & Services Revoobit</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && <a href="#portfolio" onClick={(e) => handleSmoothScroll(e, '#portfolio')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Opportunités Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
-                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Témoignages</a>
+                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Témoignages Revoobit</a>
               )}
-              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Compétences</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Mon Expertise Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showContact && <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors text-sm">Contact</a>} {/* Adjusted text size for mobile */}
             </div>
             <button className="md:hidden text-xl text-gray-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}> {/* Adjusted text size for mobile */}
@@ -218,12 +218,12 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
             <nav className="flex flex-col items-center gap-4">
               {sectionsVisibility.showHero && <a href="#accueil" onClick={(e) => handleSmoothScroll(e, '#accueil')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Accueil</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showAbout && <a href="#apropos" onClick={(e) => handleSmoothScroll(e, '#apropos')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">À propos</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Services</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && <a href="#portfolio" onClick={(e) => handleSmoothScroll(e, '#portfolio')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Portfolio</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && <a href="#services" onClick={(e) => handleSmoothScroll(e, '#services')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Produits & Services Revoobit</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && <a href="#portfolio" onClick={(e) => handleSmoothScroll(e, '#portfolio')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Opportunités Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
-                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Témoignages</a>
+                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Témoignages Revoobit</a>
               )}
-              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Compétences</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#skills" onClick={(e) => handleSmoothScroll(e, '#skills')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Mon Expertise Revoobit</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showContact && <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Contact</a>} {/* Adjusted text size for mobile */}
             </nav>
           </div>
@@ -237,16 +237,16 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
             {siteData.logoOrPhoto && (
               <Image
                 src={siteData.logoOrPhoto}
-                alt={`${siteData.publicName} Logo`}
+                alt={`${siteData.publicName} Logo Revoobit`}
                 width={siteData.heroBackgroundImage ? 60 : 100} // Smaller if background image, larger if not
                 height={siteData.heroBackgroundImage ? 60 : 100}
                 className={cn("rounded-full object-cover mb-4", siteData.heroBackgroundImage ? "mx-auto" : "mx-auto")}
               />
             )}
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{siteData.heroSlogan}</h2> {/* Adjusted text size for mobile */}
-            <p className="text-base md:text-xl mb-8 opacity-90">{siteData.aboutStory}</p> {/* Adjusted text size for mobile */}
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{siteData.heroSlogan || "Votre partenaire pour le succès avec Revoobit !"}</h2> {/* Adjusted text size for mobile */}
+            <p className="text-base md:text-xl mb-8 opacity-90">{siteData.aboutStory || "Découvrez les produits Revoobit et l'opportunité d'affaire unique."}</p> {/* Adjusted text size for mobile */}
             <a href={`https://wa.me/${siteData.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className={cn("inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-base transition-all duration-300 ease-in-out transform", whatsappBgClass, whatsappHoverBgClass, "w-full sm:w-auto")}> {/* Adjusted padding, text size, and width for mobile */}
-              <MessageSquare className="h-5 w-5" /> Contactez-moi sur WhatsApp
+              <MessageSquare className="h-5 w-5" /> Contactez-moi pour Revoobit
             </a>
           </div>
         </section>
@@ -258,18 +258,18 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                À propos de nous
+                À propos de votre distributeur Revoobit
                 <span className={cn("absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full", primaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
             </div>
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/2 text-sm leading-relaxed space-y-4"> {/* Adjusted text size for mobile */}
                 <p>{siteData.aboutStory}</p>
-                <p>Nous nous engageons à fournir un travail de qualité avec une attention particulière aux détails. Notre objectif est de satisfaire pleinement nos clients en répondant à leurs besoins spécifiques et en respectant les délais convenus. Chaque projet est pour nous l'occasion de créer un espace de vie amélioré et fonctionnel.</p>
-                <p>Basé à {siteData.businessLocation || "Dakar, Sénégal"}, nous nous déplaçons dans toute la région pour réaliser vos projets.</p>
+                <p>En tant que distributeur Revoobit, je m'engage à vous fournir un accompagnement de qualité pour découvrir les produits et développer votre propre réseau. Mon objectif est de vous aider à atteindre vos objectifs de bien-être et financiers avec Revoobit. Chaque nouveau partenaire est pour moi l'occasion de partager une opportunité de vie améliorée.</p>
+                <p>Basé à {siteData.businessLocation || "Lomé, Togo"}, je suis disponible pour vous accompagner dans toute la région.</p>
               </div>
               <div className="md:w-1/2 rounded-lg overflow-hidden shadow-lg">
-                <Image src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Artisan au travail" width={500} height={300} className="w-full h-auto object-cover" /> {/* Adjusted width/height for mobile */}
+                <Image src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Distributeur Revoobit" width={500} height={300} className="w-full h-auto object-cover" /> {/* Adjusted width/height for mobile */}
               </div>
             </div>
           </div>
@@ -281,7 +281,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Nos Services
+                Nos Produits & Services Revoobit
                 <span className={cn("absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full", primaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
             </div>
@@ -293,7 +293,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
                       <Image src={product.image} alt={product.title} width={300} height={192} className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" />
                     ) : (
                       <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
-                        <Wrench className="h-10 w-10" /> {/* Adjusted size for mobile */}
+                        <Briefcase className="h-10 w-10" /> {/* Adjusted size for mobile */}
                       </div>
                     )}
                   </div>
@@ -304,7 +304,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
                         {product.price} {product.currency}
                       </div>
                     )}
-                    <a href={`https://wa.me/${siteData.whatsappNumber}?text=Je%20suis%20intéressé%20par%20${product.title}`} target="_blank" rel="noopener noreferrer" className={cn("inline-block px-4 py-2 rounded-lg font-bold text-white text-sm transition-colors duration-300 w-full", secondaryColorClass, secondaryColorHoverBgClass)}> {/* Adjusted padding, text size, and width for mobile */}
+                    <a href={`https://wa.me/${siteData.whatsappNumber}?text=Je%20suis%20intéressé%20par%20${product.title}%20Revoobit`} target="_blank" rel="noopener noreferrer" className={cn("inline-block px-4 py-2 rounded-lg font-bold text-white text-sm transition-colors duration-300 w-full", secondaryColorClass, secondaryColorHoverBgClass)}> {/* Adjusted padding, text size, and width for mobile */}
                       {product.actionButton === 'buy' ? 'Acheter' : product.actionButton === 'quote' ? 'Demander un devis' : product.actionButton === 'book' ? 'Réserver' : 'Contacter'}
                     </a>
                   </div>
@@ -321,7 +321,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Nos Réalisations
+                Nos Opportunités Revoobit
                 <span className={cn("absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full", primaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
             </div>
@@ -345,7 +345,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
       {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && (
         <section id="skills" className="py-12 bg-gray-100 px-4"> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Nos Compétences</h2> {/* Adjusted text size and mb for mobile */}
+            <h2 className={cn("text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12", primaryColorTextClass)}>Mon Expertise Revoobit</h2> {/* Adjusted text size and mb for mobile */}
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"> {/* Adjusted grid and gap for mobile */}
               {skillsToDisplay.map((skill, index) => {
                 const IconComponent = skill.icon ? getLucideIcon(skill.icon) : Wrench;
@@ -367,7 +367,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Témoignages Clients
+                Témoignages de Succès Revoobit
                 <span className={cn("absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full", primaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
             </div>
@@ -401,7 +401,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Contactez-nous
+                Contactez votre distributeur Revoobit
                 <span className={cn("absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full", primaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
             </div>
@@ -462,9 +462,9 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
                       <input type="email" id="email" name="email" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" value={formData.email} onChange={handleChange} /> {/* Adjusted padding and text size for mobile */}
                     </div>
                     <div>
-                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Service intéressé</label> {/* Adjusted text size for mobile */}
+                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Produit Revoobit intéressé</label> {/* Adjusted text size for mobile */}
                       <select id="service" name="service" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" value={formData.service} onChange={handleChange}> {/* Adjusted padding and text size for mobile */}
-                        <option value="">Sélectionnez un service</option>
+                        <option value="">Sélectionnez un produit Revoobit</option>
                         {siteData.productsAndServices.map((product: any, idx: number) => (
                           <option key={idx} value={product.title}>{product.title}</option>
                         ))}
@@ -490,7 +490,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
         <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"> {/* Removed px-4 md:px-6, using container mx-auto */}
           <div className="text-center sm:text-left">
             <Link href="/" className="font-bold text-lg"> {/* Adjusted text size for mobile */}
-              {siteData.publicName}
+              {siteData.publicName} (Distributeur Revoobit)
             </Link>
             <p className="text-xs text-gray-300 mt-2"> {/* Ensured text-xs for smaller screens */}
               {siteData.heroSlogan}
@@ -510,7 +510,7 @@ export function ServicePortfolioTemplate({ siteData, subdomain }: ServicePortfol
           </div>
         </div>
         <div className="container px-4 md:px-6 text-center text-xs text-gray-400 mt-6">
-          © {new Date().getFullYear()} {siteData.publicName}. Tous droits réservés.
+          © {new Date().getFullYear()} {siteData.publicName} (Distributeur Revoobit). Tous droits réservés.
         </div>
       </footer>
 

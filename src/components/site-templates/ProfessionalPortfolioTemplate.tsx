@@ -157,18 +157,18 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
     : [
         {
           icon: "Wrench",
-          title: "Rénovation",
-          description: "Expertise en rénovation complète et aménagement intérieur.",
+          title: "Promotion Miira-Cell+",
+          description: "Expertise en présentation des bienfaits et utilisation de Miira-Cell+.",
         },
         {
           icon: "Hammer",
-          title: "Réparation",
-          description: "Interventions rapides et durables en plomberie, électricité, etc.",
+          title: "Développement de Réseau",
+          description: "Stratégies éprouvées pour élargir votre équipe de distributeurs Revoobit.",
         },
         {
           icon: "PaintRoller",
-          title: "Finitions",
-          description: "Maîtrise des finitions : peinture, carrelage, parquet.",
+          title: "Formation Produit Revoobit",
+          description: "Maîtrise des informations clés sur tous les produits Revoobit.",
         },
       ];
 
@@ -178,21 +178,21 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
         image: p.image || 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', // Fallback placeholder
         title: p.title,
         description: p.description,
-        category: "Rénovation", // Placeholder, could be dynamic
-        tags: ["Rénovation", "Aménagement"], // Placeholder, could be dynamic
+        category: "Produits Revoobit", // Placeholder, could be dynamic
+        tags: ["Miira-Cell+", "Miiralife"], // Placeholder, could be dynamic
       }))
     : [
-        { image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', title: "Rénovation Complète d'Appartement", description: "Transformation d'un appartement ancien en espace moderne et fonctionnel", category: "renovation", tags: ["Rénovation", "Aménagement", "3 mois"] },
-        { image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', title: "Réparation Salle de Bain", description: "Résolution de problèmes d'humidité et remplacement des équipements", category: "reparation", tags: ["Plomberie", "Carrelage", "2 semaines"] },
-        { image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1558&q=80', title: "Finitions Cuisine Sur Mesure", description: "Réalisation d'une cuisine entièrement personnalisée avec finitions haut de gamme", category: "finition", tags: ["Cuisine", "Sur mesure", "1 mois"] },
+        { image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80', title: "Présentation Miira-Cell+", description: "Découvrez les avantages uniques de Miira-Cell+ pour votre santé.", category: "produits", tags: ["Miira-Cell+", "Santé", "Bien-être"] },
+        { image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80', title: "Opportunité d'Affaire Revoobit", description: "Rejoignez mon équipe et construisez votre indépendance financière.", category: "opportunite", tags: ["MLM", "Revenu Passif", "Indépendance"] },
+        { image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1558&q=80', title: "Témoignages Clients Revoobit", description: "Des histoires de succès et de bien-être grâce aux produits Revoobit.", category: "temoignages", tags: ["Santé", "Transformation", "Succès"] },
       ];
 
   const testimonialsToDisplay = siteData.testimonials && siteData.testimonials.length > 0
     ? siteData.testimonials
     : [
-        { quote: "J'ai confié la rénovation complète de mon appartement à cet artisan et je suis absolument ravi du résultat. Le travail a été réalisé dans les délais, avec un professionnalisme remarquable. Je recommande vivement !", author: "Thomas Martin", location: siteData.businessLocation || "Dakar", avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-        { quote: "Une intervention rapide et efficace pour réparer une fuite d'eau qui menaçait de causer des dégâts importants. L'artisan a su identifier le problème rapidement et proposer une solution durable. Prix très correct pour la qualité du travail.", author: "Sophie Diallo", location: siteData.businessLocation || "Pikine", avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
-        { quote: "La rénovation de ma cuisine a été un véritable succès grâce au professionnalisme et à l'expertise de cet artisan. Il a su comprendre mes besoins et proposer des solutions à la fois esthétiques et fonctionnelles. Un travail de qualité !", author: "Robert Ndiaye", location: siteData.businessLocation || "Mermoz", avatar: "https://randomuser.me/api/portraits/men/67.jpg" },
+        { quote: "Grâce à ce distributeur Revoobit, j'ai découvert Miira-Cell+ et ma santé s'est considérablement améliorée. Un grand merci pour l'accompagnement !", author: "Afiwa Mensah", location: siteData.businessLocation || "Lomé", avatar: "https://randomuser.me/api/portraits/women/32.jpg" },
+        { quote: "J'ai rejoint l'équipe Revoobit de ce leader et je suis impressionné par le soutien et les stratégies partagées. Mon réseau grandit chaque jour !", author: "Koffi Agbévé", location: siteData.businessLocation || "Kara", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
+        { quote: "Les produits Revoobit sont incroyables, et ce distributeur m'a guidé avec professionnalisme. Je recommande à 100% !", author: "Esi Mawuli", location: siteData.businessLocation || "Sokodé", avatar: "https://randomuser.me/api/portraits/women/67.jpg" },
       ];
 
   const paymentMethods = siteData.paymentMethods && siteData.paymentMethods.length > 0
@@ -224,15 +224,15 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
               )}
               <div className="flex flex-col">
                 <h1 className={cn("text-lg font-bold", primaryColorTextClass)}>{siteData.publicName}</h1> {/* Adjusted text size for mobile */}
-                <p className={cn("text-xs font-medium", accentColorTextClass)}>Réalisations & Compétences</p> {/* Adjusted text size for mobile */}
+                <p className={cn("text-xs font-medium", accentColorTextClass)}>Distributeur Revoobit Officiel</p> {/* Adjusted text size for mobile */}
               </div>
             </div>
             <div className={cn("hidden md:flex items-center gap-6")}> {/* Adjusted gap for mobile */}
               {sectionsVisibility.showHero && <a href="#accueil" onClick={(e) => handleSmoothScroll(e, '#accueil')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Accueil</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#competences" onClick={(e) => handleSmoothScroll(e, '#competences')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Compétences</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && portfolioItemsToDisplay.length > 0 && <a href="#realisations" onClick={(e) => handleSmoothScroll(e, '#realisations')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Réalisations</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#competences" onClick={(e) => handleSmoothScroll(e, '#competences')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Mon Expertise Revoobit</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && portfolioItemsToDisplay.length > 0 && <a href="#realisations" onClick={(e) => handleSmoothScroll(e, '#realisations')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Produits & Opportunités</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
-                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Témoignages</a>
+                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Témoignages Revoobit</a>
               )}
               {sectionsVisibility.showContact && <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="text-gray-700 font-semibold relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:rounded-full after:bg-red-500 hover:text-red-500 hover:after:w-full transition-all duration-300 text-sm">Contact</a>} {/* Adjusted text size for mobile */}
             </div>
@@ -246,10 +246,10 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 z-40">
             <nav className="flex flex-col items-center gap-4">
               {sectionsVisibility.showHero && <a href="#accueil" onClick={(e) => handleSmoothScroll(e, '#accueil')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Accueil</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#competences" onClick={(e) => handleSmoothScroll(e, '#competences')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Compétences</a>} {/* Adjusted text size for mobile */}
-              {sectionsVisibility.showProductsServices && portfolioItemsToDisplay.length > 0 && <a href="#realisations" onClick={(e) => handleSmoothScroll(e, '#realisations')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Réalisations</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showSkills && skillsToDisplay.length > 0 && <a href="#competences" onClick={(e) => handleSmoothScroll(e, '#competences')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Mon Expertise Revoobit</a>} {/* Adjusted text size for mobile */}
+              {sectionsVisibility.showProductsServices && portfolioItemsToDisplay.length > 0 && <a href="#realisations" onClick={(e) => handleSmoothScroll(e, '#realisations')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Produits & Opportunités</a>} {/* Adjusted text size for mobile */}
               {sectionsVisibility.showTestimonials && testimonialsToDisplay.length > 0 && (
-                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Témoignages</a>
+                <a href="#temoignages" onClick={(e) => handleSmoothScroll(e, '#temoignages')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Témoignages Revoobit</a>
               )}
               {sectionsVisibility.showContact && <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')} className="text-gray-700 font-medium hover:text-blue-600 transition-colors w-full text-center py-2 text-base">Contact</a>} {/* Adjusted text size for mobile */}
             </nav>
@@ -264,16 +264,16 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
             {siteData.logoOrPhoto && (
               <Image
                 src={siteData.logoOrPhoto}
-                alt={`${siteData.publicName} Logo`}
+                alt={`${siteData.publicName} Logo Revoobit`}
                 width={siteData.heroBackgroundImage ? 60 : 100} // Smaller if background image, larger if not
                 height={siteData.heroBackgroundImage ? 60 : 100}
                 className={cn("rounded-full object-cover mb-4", siteData.heroBackgroundImage ? "mx-auto" : "mx-auto")}
               />
             )}
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">{siteData.heroSlogan}</h2> {/* Adjusted text size for mobile */}
-            <p className="text-base md:text-xl mb-8 opacity-90">{siteData.aboutStory}</p> {/* Adjusted text size for mobile */}
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">{siteData.heroSlogan || "Développez votre réseau et vos ventes Revoobit !"}</h2> {/* Adjusted text size for mobile */}
+            <p className="text-base md:text-xl mb-8 opacity-90">{siteData.aboutStory || "Votre partenaire digital pour une croissance exponentielle avec Revoobit."}</p> {/* Adjusted text size for mobile */}
             <a href={`https://wa.me/${siteData.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className={cn("inline-flex items-center gap-3 px-6 py-3 rounded-full font-bold text-base transition-all duration-300 ease-in-out transform", whatsappBgClass, whatsappHoverBgClass, "shadow-lg hover:shadow-xl w-full sm:w-auto")}> {/* Adjusted padding, text size, and width for mobile */}
-              <MessageSquare className="h-5 w-5" /> Discuter de mon projet
+              <MessageSquare className="h-5 w-5" /> Discuter de l'opportunité Revoobit
             </a>
           </div>
         </section>
@@ -285,10 +285,10 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Mes Domaines d'Expertise
+                Mon Expertise Revoobit
                 <span className={cn("absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-20 h-1 rounded-full", secondaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
-              <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">Un savoir-faire diversifié pour répondre à tous vos besoins</p> {/* Adjusted mt and text size for mobile */}
+              <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">Un savoir-faire dédié à votre succès avec Revoobit</p> {/* Adjusted mt and text size for mobile */}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> {/* Adjusted gap and grid for mobile */}
               {skillsToDisplay.map((skill: any, index: number) => {
@@ -316,19 +316,19 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6"> {/* Adjusted grid for mobile */}
             <div className="p-2"> {/* Adjusted padding for mobile */}
               <span className="block text-4xl font-bold mb-1">150+</span> {/* Adjusted text size for mobile */}
-              <span className="text-base opacity-90">Projets Réalisés</span> {/* Adjusted text size for mobile */}
+              <span className="text-base opacity-90">Distributeurs Accompagnés</span> {/* Adjusted text size for mobile */}
             </div>
             <div className="p-2"> {/* Adjusted padding for mobile */}
               <span className="block text-4xl font-bold mb-1">10+</span> {/* Adjusted text size for mobile */}
-              <span className="text-base opacity-90">Années d'Expérience</span> {/* Adjusted text size for mobile */}
+              <span className="text-base opacity-90">Années d'Expérience Revoobit</span> {/* Adjusted text size for mobile */}
             </div>
             <div className="p-2"> {/* Adjusted padding for mobile */}
               <span className="block text-4xl font-bold mb-1">98%</span> {/* Adjusted text size for mobile */}
-              <span className="text-base opacity-90">Clients Satisfaits</span> {/* Adjusted text size for mobile */}
+              <span className="text-base opacity-90">Clients Revoobit Satisfaits</span> {/* Adjusted text size for mobile */}
             </div>
             <div className="p-2"> {/* Adjusted padding for mobile */}
               <span className="block text-4xl font-bold mb-1">24h</span> {/* Adjusted text size for mobile */}
-              <span className="text-base opacity-90">Délai d'Intervention</span> {/* Adjusted text size for mobile */}
+              <span className="text-base opacity-90">Support Réactif</span> {/* Adjusted text size for mobile */}
             </div>
           </div>
         </div>
@@ -340,17 +340,17 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
           <div className="container mx-auto max-w-5xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Mes Réalisations
+                Mes Produits & Opportunités Revoobit
                 <span className={cn("absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-20 h-1 rounded-full", secondaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
-              <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">Découvrez une sélection de mes projets les plus représentatifs</p> {/* Adjusted mt and text size for mobile */}
+              <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">Découvrez les produits phares et l'opportunité d'affaire Revoobit</p> {/* Adjusted mt and text size for mobile */}
             </div>
             {/* Filters (simplified for now, can be made dynamic later) */}
             <div className="flex justify-center gap-2 mb-8 flex-wrap"> {/* Adjusted gap and flex-wrap for mobile */}
               <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Tous</button> {/* Adjusted padding and text size for mobile */}
-              <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Rénovation</button> {/* Adjusted padding and text size for mobile */}
-              <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Réparation</button> {/* Adjusted padding and text size for mobile */}
-              <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Finitions</button> {/* Adjusted padding and text size for mobile */}
+              <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Produits Santé</button> {/* Adjusted padding and text size for mobile */}
+              <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Opportunité MLM</button> {/* Adjusted padding and text size for mobile */}
+              <button className={cn("px-4 py-1.5 rounded-full font-semibold transition-all duration-300 border text-sm", primaryColorBorderClass, primaryColorTextClass, primaryColorHoverBgClass, "hover:text-white")}>Témoignages</button> {/* Adjusted padding and text size for mobile */}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> {/* Adjusted gap and grid for mobile */}
               {portfolioItemsToDisplay.map((item: any, index: number) => (
@@ -381,10 +381,10 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
           <div className="container mx-auto max-w-4xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
             <div className="text-center mb-8 md:mb-12"> {/* Adjusted mb for mobile */}
               <h2 className={cn("text-2xl md:text-4xl font-bold mb-4 relative inline-block", primaryColorTextClass)}> {/* Adjusted text size for mobile */}
-                Ils m'ont fait confiance
+                Ils m'ont fait confiance avec Revoobit
                 <span className={cn("absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-20 h-1 rounded-full", secondaryColorClass)}></span> {/* Adjusted width for mobile */}
               </h2>
-              <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">Retours d'expérience de clients satisfaits</p> {/* Adjusted mt and text size for mobile */}
+              <p className="mt-6 text-base text-gray-600 max-w-2xl mx-auto">Retours d'expérience de clients et partenaires Revoobit satisfaits</p> {/* Adjusted mt and text size for mobile */}
             </div>
             <div className="relative">
               <div className="overflow-hidden" ref={emblaRef}>
@@ -429,8 +429,8 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
       {sectionsVisibility.showContact && (
         <section className={cn("py-16 text-white text-center px-4", secondaryColorClass)} style={{ background: `linear-gradient(135deg, var(--${siteData.secondaryColor}-600) 0%, var(--${siteData.primaryColor}-800) 100%)` }}> {/* Adjusted padding for mobile */}
           <div className="container mx-auto max-w-4xl"> {/* Removed px-4 md:px-6, using container mx-auto */}
-            <h2 className="text-3xl font-bold mb-4">Prêt à concrétiser votre projet ?</h2> {/* Adjusted text size for mobile */}
-            <p className="text-base md:text-xl mb-8 opacity-90">N'hésitez pas à me contacter pour discuter de vos besoins et obtenir un devis personnalisé</p> {/* Adjusted text size for mobile */}
+            <h2 className="text-3xl font-bold mb-4">Prêt à rejoindre l'aventure Revoobit ?</h2> {/* Adjusted text size for mobile */}
+            <p className="text-base md:text-xl mb-8 opacity-90">N'hésitez pas à me contacter pour discuter des produits ou de l'opportunité d'affaire Revoobit</p> {/* Adjusted text size for mobile */}
             {siteData.showContactForm ? (
               <div className="bg-white p-6 rounded-lg shadow-md text-gray-800"> {/* Adjusted padding for mobile */}
                 <form onSubmit={handleSubmit} className="space-y-4"> {/* Adjusted space-y for mobile */}
@@ -448,9 +448,9 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
                   </div>
                   {siteData.productsAndServices.length > 0 && (
                     <div>
-                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Service intéressé</label> {/* Adjusted text size for mobile */}
+                      <label htmlFor="service" className="block text-gray-700 font-medium mb-1 text-sm">Sujet intéressé (Produit/Opportunité)</label> {/* Adjusted text size for mobile */}
                       <select id="service" name="service" className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" value={formData.service} onChange={handleChange}> {/* Adjusted padding and text size for mobile */}
-                        <option value="">Sélectionnez un service</option>
+                        <option value="">Sélectionnez un sujet</option>
                         {siteData.productsAndServices.map((product: any, idx: number) => (
                           <option key={idx} value={product.title}>{product.title}</option>
                         ))}
@@ -469,7 +469,7 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
             ) : (
               <div className="flex flex-col sm:flex-row gap-4 justify-center"> {/* Adjusted gap for mobile */}
                 <a href={`https://wa.me/${siteData.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className={cn("inline-flex items-center gap-3 px-6 py-3 rounded-full font-bold text-base transition-all duration-300 ease-in-out transform", whatsappBgClass, whatsappHoverBgClass, "shadow-lg hover:shadow-xl w-full sm:w-auto")}> {/* Adjusted padding, text size, and width for mobile */}
-                  <MessageSquare className="h-5 w-5" /> Discuter de mon projet
+                  <MessageSquare className="h-5 w-5" /> Discuter de mon projet Revoobit
                 </a>
                 {siteData.secondaryPhoneNumber && (
                   <a href={`tel:${siteData.secondaryPhoneNumber}`} className="inline-flex items-center gap-3 px-6 py-3 rounded-full font-bold text-base bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 transition-all duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg w-full sm:w-auto"> {/* Adjusted padding, text size, and width for mobile */}
@@ -487,7 +487,7 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
         <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"> {/* Removed px-4 md:px-6, using container mx-auto */}
           <div className="text-center sm:text-left">
             <Link href="/" className="font-bold text-lg"> {/* Adjusted text size for mobile */}
-              {siteData.publicName}
+              {siteData.publicName} (Distributeur Revoobit)
             </Link>
             <p className="text-xs text-gray-300 mt-2"> {/* Ensured text-xs for smaller screens */}
               {siteData.heroSlogan}
@@ -507,7 +507,7 @@ export function ProfessionalPortfolioTemplate({ siteData, subdomain }: Professio
           </div>
         </div>
         <div className="container px-4 md:px-6 text-center text-xs text-gray-400 mt-6">
-          © {new Date().getFullYear()} {siteData.publicName}. Tous droits réservés.
+          © {new Date().getFullYear()} {siteData.publicName} (Distributeur Revoobit). Tous droits réservés.
         </div>
       </footer>
 

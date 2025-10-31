@@ -8,33 +8,33 @@ export function FeaturesSection() {
   const features = [
     {
       icon: <Globe className="h-6 w-6 text-primary" />,
-      title: "Sous-domaine personnalisé",
-      description: "(tonnom.ctcsite.com)",
+      title: "Sous-domaine Revoobit personnalisé",
+      description: "(tonnom.revoobit-togo.com)",
     },
     {
       icon: <Server className="h-6 w-6 text-primary" />,
-      title: "Hébergement sécurisé",
+      title: "Hébergement optimisé Revoobit",
       description: "(Serveurs rapides, 99% uptime)",
     },
     {
       icon: <Settings className="h-6 w-6 text-primary" />,
-      title: "Maintenance incluse",
-      description: "(Mises à jour, sécurité, support)",
+      title: "Maintenance & Mises à jour Revoobit",
+      description: "(Sécurité, support, conformité Revoobit)",
     },
     {
       icon: <Layout className="h-6 w-6 text-primary" />,
-      title: "Design automatique",
-      description: "(Choisi selon ton secteur)",
+      title: "Design professionnel Revoobit",
+      description: "(Adapté aux produits et à la marque Revoobit)",
     },
     {
       icon: <Smartphone className="h-6 w-6 text-primary" />,
-      title: "Site responsive",
-      description: "(Adapté à téléphone, tablette, PC)",
+      title: "Site responsive pour tous les appareils",
+      description: "(Accessible sur téléphone, tablette, PC)",
     },
     {
       icon: <FileText className="h-6 w-6 text-primary" />,
-      title: "Contenu intelligent",
-      description: "(Textes générés pour ton activité)",
+      title: "Contenu intelligent pour tes produits",
+      description: "(Textes générés pour Miira-Cell+, Miiralife, etc.)",
     },
   ];
 
@@ -42,7 +42,7 @@ export function FeaturesSection() {
     <section className="w-full py-12 md:py-24 lg:py-32 bg-muted px-4"> {/* Added px-4 */}
       <div className="container mx-auto text-center"> {/* Removed px-4 md:px-6, using container mx-auto */}
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12">
-          Ce que tu obtiens gratuitement
+          Ce que tu obtiens pour booster ta présence Revoobit
         </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"> {/* Added max-w-5xl mx-auto */}
           {features.map((feature, index) => (

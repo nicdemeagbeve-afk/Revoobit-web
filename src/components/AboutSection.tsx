@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Lightbulb, Users, User as UserIcon } from "lucide-react";
+import { Sparkles, Lightbulb, Users, User as UserIcon, Target, Globe } from "lucide-react"; // Added Target and Globe icons
 import { getSupabaseStorageUrl } from "@/lib/utils"; // Import getSupabaseStorageUrl
 
 export function AboutSection() {
@@ -11,31 +11,31 @@ export function AboutSection() {
     {
       name: "Nicodème AGBEVE",
       role: "Fondateur & Développeur",
-      description: "Visionnaire et architecte technique de Miabesite, il transforme les idées en réalité numérique.",
+      description: "Visionnaire et architecte technique de Revoobit Togo Digital Hub, il transforme les idées en réalité numérique pour les distributeurs Revoobit.",
       // avatar: "team-nicodeme.png", // Supprimé pour utiliser l'icône générique
     },
     {
       name: "Christian ADEGBETI",
       role: "Co-fondateur & Cybersec",
-      description: "Garant de la sécurité de nos plateformes et de la protection des données de nos utilisateurs.",
+      description: "Garant de la sécurité de nos plateformes et de la protection des données des distributeurs Revoobit.",
       // avatar: "team-christian.png", // Supprimé pour utiliser l'icône générique
     },
     {
       name: "Communication & Media Manager",
       role: "Un membre clé de notre équipe",
-      description: "Assure la visibilité de Miabesite et la connexion avec notre communauté.",
+      description: "Assure la visibilité de Revoobit Togo Digital Hub et la connexion avec notre communauté de distributeurs.",
       // avatar: "team-generic-1.png", // Supprimé pour utiliser l'icône générique
     },
     {
       name: "Développeur Back-end",
       role: "Un membre clé de notre équipe",
-      description: "Construit l'infrastructure robuste qui alimente nos sites web automatisés.",
+      description: "Construit l'infrastructure robuste qui alimente les mini-sites Revoobit automatisés.",
       // avatar: "team-generic-2.png", // Supprimé pour utiliser l'icône générique
     },
     {
       name: "Développeur Front-end",
       role: "Un membre clé de notre équipe",
-      description: "Crée des interfaces utilisateur intuitives et esthétiques pour une expérience optimale.",
+      description: "Crée des interfaces utilisateur intuitives et esthétiques pour une expérience optimale des distributeurs Revoobit.",
       // avatar: "team-generic-3.png", // Supprimé pour utiliser l'icône générique
     },
   ];
@@ -44,31 +44,34 @@ export function AboutSection() {
     <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-background px-4">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-8 text-blue-600">
-          À propos de Miabesite
+          À propos de Revoobit Togo Digital Hub
         </h2>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Bienvenue chez Miabesite, votre partenaire pour une présence en ligne rapide et sans effort en Afrique de l'Ouest. Nous croyons que chaque entreprise, petite ou grande, mérite un site web moderne et professionnel sans les tracas techniques ou les coûts exorbitants.
+          Bienvenue chez Revoobit Togo Digital Hub, la filiale officielle de Revoobit dédiée à accompagner les distributeurs et partenaires du Togo dans leur transformation digitale. Nous agissons en synergie avec revoobit.com pour vous offrir des outils, formations et solutions numériques adaptés aux réalités locales.
         </p>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div className="text-left space-y-6">
             <h3 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-              <Sparkles className="h-7 w-7 text-yellow-500" /> Notre Mission
+              <Target className="h-7 w-7 text-red-500" /> Notre Objectif Principal
             </h3>
             <p className="text-base text-gray-700 leading-relaxed">
-              Notre mission est de démocratiser la création de sites web grâce à une technologie d'intelligence artificielle avancée. En seulement 5 minutes et pour un <span className="font-semibold text-blue-600">démarrage gratuit</span>, nous transformons vos idées en une réalité numérique, vous permettant de vous concentrer sur ce qui compte le plus : votre business.
+              Permettre à chaque distributeur togolais de Revoobit d’avoir une <span className="font-semibold text-blue-600">présence en ligne professionnelle</span>, de mieux promouvoir les produits Revoobit (Miira-Cell+, Miiralife, etc.) sur les réseaux sociaux et plateformes e-commerce, et d’élargir sa clientèle grâce à des stratégies digitales simples, efficaces et éthiques.
             </p>
             <h3 className="text-2xl font-bold text-gray-800 flex items-center gap-3">
-              <Lightbulb className="h-7 w-7 text-blue-600" /> Notre Vision
+              <Lightbulb className="h-7 w-7 text-blue-600" /> Nos Missions
             </h3>
-            <p className="text-base text-gray-700 leading-relaxed">
-              Nous aspirons à être le leader de la création de sites web automatisée en Afrique, en offrant des solutions innovantes, accessibles et fiables qui propulsent les entrepreneurs et les petites entreprises vers le succès numérique.
-            </p>
+            <ul className="list-disc list-inside text-base text-gray-700 leading-relaxed space-y-2">
+              <li>**Digitalisation du réseau** : Création de mini-sites, boutiques et pages personnalisées pour chaque distributeur.</li>
+              <li>**Formation & accompagnement** : Ateliers pratiques sur le marketing numérique, la vente en ligne et la gestion de la relation client.</li>
+              <li>**Support & communication locale** : Production de contenus (visuels, vidéos, messages promotionnels) adaptés au marché togolais et conformes à la charte Revoobit internationale.</li>
+              <li>**Synergie avec le site principal** : Les outils du Hub Togo sont interconnectés avec revoobit.com, garantissant une cohérence de marque, des mises à jour produits centralisées, et une communication fluide entre le siège et les partenaires locaux.</li>
+            </ul>
           </div>
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden shadow-xl">
             <Image
               src={getSupabaseStorageUrl("about-miabesite-hero.png")} // Using Supabase storage URL
-              alt="À propos de Miabesite"
+              alt="À propos de Revoobit Togo Digital Hub"
               layout="fill"
               objectFit="cover"
               className="transition-transform duration-500 hover:scale-105"
@@ -77,10 +80,24 @@ export function AboutSection() {
         </div>
 
         <h3 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-black">
+          Notre Engagement
+        </h3>
+        <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+          Revoobit Togo Digital Hub s’engage à soutenir le développement professionnel et financier des revendeurs, à promouvoir un usage responsable et éthique du digital, et à contribuer à la notoriété de Revoobit en Afrique de l’Ouest par la qualité, la transparence et l’innovation.
+        </p>
+
+        <h3 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-black">
+          Notre Vision
+        </h3>
+        <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+          Faire du Togo un centre de référence numérique Revoobit en Afrique francophone, où chaque vendeur peut bâtir une présence digitale solide et durable tout en représentant fièrement la marque Revoobit.
+        </p>
+
+        <h3 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-black">
           Notre Équipe
         </h3>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Miabesite est fier d'être une équipe locale passionnée par le numérique, dédiée à soutenir la croissance économique de notre région. Nous sommes là pour vous accompagner à chaque étape, avec un support réactif et une plateforme intuitive.
+          Revoobit Togo Digital Hub est fier d'être une équipe locale passionnée par le numérique, dédiée à soutenir la croissance économique de notre région et le succès de chaque distributeur Revoobit.
         </p>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
